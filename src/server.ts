@@ -7,14 +7,14 @@ const PORT: number = Number(process.env.APP_PORT) || 8000;
 async function initialize() {
     await AppDataSource.initialize()
         .then(() => {
-            console.log(new Date().toLocaleString(), ': Database connected.');
+            console.log(new Date().toLocaleString(), ": Database connected.");
         }).catch((err) => {
             console.error(err);
-            console.log(new Date().toLocaleString(), ': Failed to connect with database.');
+            console.log(new Date().toLocaleString(), ": Failed to connect with database.");
         });
 
     app.listen(PORT, () => {
-        console.log(new Date().toLocaleString(), ': Server listening on port ', PORT);
+        console.log(new Date().toLocaleString(), ": Server listening on port ", PORT);
     });
 };
 
