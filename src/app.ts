@@ -1,13 +1,13 @@
-import 'express-async-errors';
-import * as express from 'express';
-import { errorHandler } from './errors';
-import * as cors from 'cors';
-import { exampleRoutes } from './modules/example/example.routes';
+import "express-async-errors";
+import * as express from "express";
+import { errorHandler } from "./errors";
+import * as cors from "cors";
+import { exampleRoutes } from "./modules/example/example.routes";
 
 const app: express.Application = express();
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 }));
 
 // Import all routes here
