@@ -3,7 +3,4 @@ import * as controllers from "./example.controllers";
 
 export const exampleRoutes = Router();
 
-exampleRoutes.get(
-    'hello-world/',
-    controllers.getHelloController
-);
+exampleRoutes.post("hello-world/", controllers.getHelloController);
