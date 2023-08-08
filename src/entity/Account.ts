@@ -21,7 +21,7 @@ export class Account {
   @Column()
   AccountType: string;
 
-  @OneToOne(() => User)
-  @JoinColumn({ name: "UserID" })
-  user: User;
+  // @OneToOne(() => User)
+  // @JoinColumn({ name: "UserID" })
+  // user: User;
 }

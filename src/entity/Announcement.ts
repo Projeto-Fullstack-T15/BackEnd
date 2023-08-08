@@ -41,10 +41,10 @@ export class Announcement {
   @Column("text")
   Description: string;
 
-  @ManyToOne(() => User, (user) => user.announcements)
-  @JoinColumn({ name: "UserID" })
-  user: User;
+  // @ManyToOne(() => User, (user) => user.announcements)
+  // @JoinColumn({ name: "UserID" })
+  // user: User;
 
-  @OneToMany(() => Comment, (comment) => comment.announcement)
-  comments: Comment[];
+  // @OneToMany(() => Comment, (comment) => comment.announcement)
+  // comments: Comment[];
 }

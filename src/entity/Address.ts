@@ -1,9 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { User } from "./User";
 
 @Entity("addresses")
@@ -29,6 +24,6 @@ export class Address {
   @Column()
   Complement: string;
 
-  @OneToMany(() => User, (user) => user.address)
-  users: User[];
+  // @OneToMany(() => User, (user) => user.address)
+  // users: User[];
 }
