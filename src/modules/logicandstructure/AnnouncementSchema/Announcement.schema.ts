@@ -9,7 +9,7 @@ const AnnouncementSchemaResponse = z.object({
   FuelType: z.string(),
   Mileage: z.number(),
   Price: z.string(), // Aqui, o preço é uma string porque é um valor decimal no formato de string.
-  PriceTableFIPE: z.string(), // Também é uma string.fe
+  PriceTableFIPE: z.string(), // Também é uma string.
   Description: z.string(),
 });
 const AnnouncementSchemaRequest = AnnouncementSchemaResponse.omit({ ID: true });

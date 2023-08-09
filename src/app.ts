@@ -2,7 +2,7 @@ import "express-async-errors";
 import * as express from "express";
 import { errorHandler } from "./errors";
 import * as cors from "cors";
-import { exampleRoutes } from "./modules/example/example.routes";
+import { AnnouncementRoutes } from "./modules/logicandstructure/AnnouncementRoutes/AnnouncementRoutes";
 
 const app: express.Application = express();
 app.use(
@@ -13,7 +13,7 @@ app.use(
 );
 
 // Import all routes here
-const routes: Array<express.Router> = [exampleRoutes];
+const routes: Array<express.Router> = [AnnouncementRoutes];
 
 routes.forEach((route) => {
   app.use(route);

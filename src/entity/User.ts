@@ -31,17 +31,17 @@ export class User {
   @Column("text")
   Description: string;
 
-  @OneToMany(() => Announcement, (announcement) => announcement.user)
-  announcements: Announcement[];
+  // @OneToMany(() => Announcement, (announcement) => announcement.user)
+  // announcements: Announcement[];
 
-  @OneToMany(() => Comment, (comment) => comment.user)
-  comments: Comment[];
+  // @OneToMany(() => Comment, (comment) => comment.user)
+  // comments: Comment[];
 
-  @OneToOne(() => Account)
-  @JoinColumn({ name: "AccountID" })
-  account: Account;
+  // @OneToOne(() => Account)
+  // @JoinColumn({ name: "AccountID" })
+  // account: Account;
 
-  @OneToOne(() => Address)
-  @JoinColumn({ name: "AddressID" })
-  address: Address;
+  // @OneToOne(() => Address)
+  // @JoinColumn({ name: "AddressID" })
+  // address: Address;
 }
