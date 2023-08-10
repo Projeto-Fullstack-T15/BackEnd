@@ -6,8 +6,8 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { User } from "./User";
-import { Comment } from "./Comment";
+// import { User } from "./User";
+// import { Comment } from "./Comment";
 
 @Entity("announcements")
 export class Announcement {

@@ -1,50 +1,38 @@
 import { NextFunction, Request, Response } from "express";
-import { writeFileSync, WriteFileOptions } from "fs";
 import { ZodError } from "zod";
-import * as path from "path";
-export class AppError extends Error {
-  message: string;
+
+class AppError extends Error {
   statusCode: number;
 
-  constructor(message: string, statusCode: number) {
-    super();
-    this.message = message;
+  constructor(message: string, statusCode: number = 400) {
+    super(message);
+    this.name = this.constructor.name; // Define o nome da classe como o nome do erro
     this.statusCode = statusCode;
+    Object.setPrototypeOf(this, new.target.prototype); // Mantém o protótipo correto da classe
   }
 }
-
-export class RequestError extends Error {
-  public status: number;
-  public message: string;
-
-  constructor(
-    status: number = 500,
-    message: string = "Unknown problem in server, contact developers."
-  ) {
-    super();
-    this.status = status;
-    this.message = message;
+const handleErrors = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      message: err.message,
+    });
   }
-}
-
-export function errorHandler(
-  error: Error,
-  request: Request,
-  response: Response,
-  nextFunction: NextFunction
-): Response {
-  // saveErrorOnLog(error);
-
-  if (error instanceof ZodError) {
-    return response.status(400).json({ message: error.flatten().fieldErrors });
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      message: err.flatten().fieldErrors,
+    });
   }
-
-  if (error instanceof RequestError) {
-    return response.status(error.status).json({ message: error.message });
-  }
-
-  return response.status(500).json({ message: error.message });
-}
+  console.log(err);
+  return res.status(500).json({
+    message: "Internal server error",
+  });
+};
+export { AppError, handleErrors };
 
 // function saveErrorOnLog(json: Object) {
 //   const errorDate = new Date().toISOString();

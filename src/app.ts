@@ -1,10 +1,13 @@
 import "express-async-errors";
+import "reflect-metadata";
 import * as express from "express";
-import { errorHandler } from "./errors";
+import { handleErrors } from "./errors";
+import { Application } from "express";
 import * as cors from "cors";
-import { AnnouncementRoutes } from "./modules/logicandstructure/AnnouncementRoutes/AnnouncementRoutes";
+import { AnnouncementRoutes } from "./modules/logicandstructure/routes/AnnouncementRoutes";
 
-const app: express.Application = express();
+const app: Application = express();
+app.use(express.json());
 app.use(
   cors({
     origin: "*",
@@ -13,12 +16,9 @@ app.use(
 );
 
 // Import all routes here
-const routes: Array<express.Router> = [AnnouncementRoutes];
 
-routes.forEach((route) => {
-  app.use(route);
-});
+app.use("/announcement", AnnouncementRoutes);
 
-app.use(errorHandler);
+app.use(handleErrors);
 
 export default app;
