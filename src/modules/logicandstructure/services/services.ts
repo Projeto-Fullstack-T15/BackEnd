@@ -42,41 +42,6 @@ export const listAnuuncService = async (): Promise<TAnnouncementResponse> => {
   return usersResponse;
 };
 
-// export const updateAnnouncementServices = async (
-//   Data: Announcement,
-//   id: any
-// ): Promise<Announcement> => {
-//   const AnnouncementRepository: Repository<Announcement> =
-//     AppDataSource.getRepository(Announcement);
-//   const parsedId: number = parseInt(id);
-
-//   // Verifica se o parsedId é um número inteiro válido
-//   const existingAnnouncement = await AnnouncementRepository.findOneBy({
-//     ID: parsedId,
-//   });
-
-//   if (!existingAnnouncement) {
-//     throw new AppError(`Anúncio com o ID ${id} não encontrado.`);
-//   }
-
-//   const newDataAnnouncement: Announcement = AnnouncementRepository.create({
-//     ...existingAnnouncement,
-//     ...Data,
-//   });
-//   // existingAnnouncement.Brand = Data.Brand;
-//   // existingAnnouncement.description = Data.description;
-//   // Atualize outros campos conforme necessário
-
-//   console.log(existingAnnouncement);
-
-//   await AnnouncementRepository.save(existingAnnouncement);
-
-//   const returnAnnouncement: any =
-//     AnnouncementSchema.parse(existingAnnouncement);
-
-//   return returnAnnouncement;
-// };
-
 export const updateAnnouncementServices = async (
   data: TupdateAnnouncementUpdateRequest,
   id: number

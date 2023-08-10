@@ -14,7 +14,6 @@ export const getAnnouncementController = async (
   request: Request,
   response: Response
 ) => {
-  console.log(response);
   const responseAnnouncement = await listAnuuncService();
 
   return response.status(200).json(responseAnnouncement);
@@ -24,7 +23,6 @@ export const postAnnouncementController = async (
   response: Response
 ) => {
   const Data: Announcement = request.body;
-  console.log(request.body);
   const responseAnnouncement = await createServiceAnnouncement(Data);
 
   return response.status(201).json(responseAnnouncement);
@@ -35,7 +33,6 @@ export const updateAnnouncementController = async (
 ) => {
   const Data: Announcement = request.body;
   const id: number = parseFloat(request.params.id);
-  console.log(typeof id);
 
   const responseAnnouncement = await updateAnnouncementServices(Data, id);
 
