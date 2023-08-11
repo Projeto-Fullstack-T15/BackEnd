@@ -12,31 +12,31 @@ import {
 @Entity("announcements")
 export class Announcement {
     @PrimaryGeneratedColumn("increment")
-    ID: number;
+    id: number;
 
     @Column()
-    Brand: string;
+    brand: string;
 
     @Column()
-    Model: string;
+    model: string;
 
     @Column()
-    Color: string;
+    color: string;
 
     @Column()
-    Year: number;
+    year: number;
 
     @Column()
-    FuelType: string;
+    fuelType: string;
 
     @Column()
-    Mileage: number;
+    mileage: number;
 
     @Column("decimal", { precision: 10, scale: 2 })
-    Price: number;
+    price: number;
 
     @Column("text")
-    Description: string;
+    description: string;
 
     // @ManyToOne(() => User, (user) => user.announcements)
     // @JoinColumn({ name: "UserID" })

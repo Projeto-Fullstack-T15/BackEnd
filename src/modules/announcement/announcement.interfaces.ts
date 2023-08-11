@@ -8,5 +8,5 @@ import {
 
 export type AnnouncementCreateRequest = z.infer<typeof CreateAnnouncementSchema>;
 export type AnnouncementUpdateRequest = z.infer<typeof UpdateAnnouncementSchema>;
-export type AnnouncementResponse = z.infer<typeof GetAnnouncementSchema>;
-export type AnnouncementListResponse = z.infer<typeof ListAnnouncementSchema>;
+export type ParsedAnnouncement = z.infer<typeof GetAnnouncementSchema>;
+export type ParsedAnnouncementList = z.infer<typeof ListAnnouncementSchema>;

@@ -1,26 +1,12 @@
 import { Repository } from "typeorm";
 import { Announcement } from "../announcement.entity";
 import { AppDataSource } from "../../../data-source";
-import { AnnouncementResponse } from "../announcement.interfaces";
-import { GetAnnouncementSchema } from "../announcement.schemas";
-import { AppError } from "../../../errors";
 
-export async function remove(ID: number): Promise<AnnouncementResponse> {
-    const isIdAnInteger: boolean = isNaN(ID) || String(ID) !== ID.toFixed(0);
-    if (!isIdAnInteger) {
-        throw new AppError("ID parameter should be an intenger", 400);
-    }
-
+export async function remove(
+    announcement: Announcement,
+): Promise<Announcement> {
     const announcementsRepository: Repository<Announcement> = AppDataSource.getRepository(Announcement);
+    await announcementsRepository.remove(announcement);
 
-    const findAnnouncement: Announcement = await announcementsRepository.findOne({ where: { ID } });
-    if (!findAnnouncement) {
-        throw new AppError("Announcement not found", 404);
-    }
-
-    await announcementsRepository.remove(findAnnouncement);
-
-    const parsedAnnouncement = GetAnnouncementSchema.parse(findAnnouncement);
-
-    return parsedAnnouncement;
+    return announcement;
 };
