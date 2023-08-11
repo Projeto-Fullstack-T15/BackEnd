@@ -1,9 +1,13 @@
 import "express-async-errors";
-import * as express from "express";
+import express, { Application } from "express";
 import { errorHandler } from "./errors";
-import * as cors from "cors";
+import cors from "cors";
+import * as Global from "./modules/global";
+import * as Announcement from "./modules/announcement";
+import { logWithDate } from "./utils/logWithDate.util";
+import { getAllEndpoints } from "./utils/getAllRoutes.util";
 
-const app: express.Application = express();
+const app: Application = express();
 app.use(
 	cors({
 		origin: "*",
@@ -11,10 +15,17 @@ app.use(
 	})
 );
 
-const routes: Array<express.Router> = [];
+const routes: Array<Global.interfaces.CustomRoute> = [
+	{ path: "announcements", router: Announcement.router },
+];
 
 routes.forEach((route) => {
-	app.use(route);
+	const path = `/api/${route.path}`;
+	app.use(path, route.router);
+
+	const endpoints = getAllEndpoints(route.router, path);
+
+	endpoints.forEach((e) => logWithDate(`[ROUTE] ${e}`));
 });
 
 app.use(errorHandler);
