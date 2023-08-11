@@ -1,16 +1,47 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
+import { Announcement } from "./Announcement";
+import { Comment } from "./Comment";
+import { Address } from "./Address";
+import { Account } from "./Account";
 
-@Entity()
+@Entity("users")
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn("increment")
+  ID: number;
 
-    @Column()
-    firstName: string
+  @Column()
+  Name: string;
 
-    @Column()
-    lastName: string
+  @Column({ unique: true })
+  CPF: string;
 
-    @Column()
-    age: number
+  @Column()
+  Phone: string;
+
+  @Column({ type: "date" })
+  BirthDate: Date;
+
+  @Column("text")
+  Description: string;
+
+  @OneToMany(() => Announcement, (announcement) => announcement.user)
+  announcements: Announcement[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
+
+  @OneToOne(() => Account)
+  @JoinColumn({ name: "AccountID" })
+  account: Account;
+
+  @OneToOne(() => Address)
+  @JoinColumn({ name: "AddressID" })
+  address: Address;
 }
