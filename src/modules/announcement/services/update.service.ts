@@ -3,7 +3,7 @@ import { AppDataSource } from "../../../data-source";
 import { Announcement } from "../announcement.entity";
 import { AppError } from "../../../errors";
 import { AnnouncementResponse, AnnouncementUpdateRequest } from "../announcement.interfaces";
-import { GetAnnouncementResponse } from "../announcements.schemas";
+import { GetAnnouncementSchema } from "../announcement.schemas";
 
 export async function update(
     data: AnnouncementUpdateRequest,
@@ -24,7 +24,7 @@ export async function update(
     await announcementsRepository.update(findAnnouncement, data);
 
     const updatedAnnouncement = await announcementsRepository.findOne({ where: { ID } });
-    const parsedAnnouncement = GetAnnouncementResponse.parse(updatedAnnouncement);
+    const parsedAnnouncement = GetAnnouncementSchema.parse(updatedAnnouncement);
 
     return parsedAnnouncement;
 }

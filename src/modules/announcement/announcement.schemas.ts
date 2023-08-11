@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const GetAnnouncementResponse = z.object({
+export const GetAnnouncementSchema = z.object({
     ID: z.number(),
     Brand: z.string(),
     Model: z.string(),
@@ -26,5 +26,5 @@ export const ListAnnouncementSchema = z.object({
     Description: z.string(),
 }).array();
 
-export const CreateAnnouncementSchema = GetAnnouncementResponse.omit({ ID: true });
+export const CreateAnnouncementSchema = GetAnnouncementSchema.omit({ ID: true });
 export const UpdateAnnouncementSchema = CreateAnnouncementSchema.partial();

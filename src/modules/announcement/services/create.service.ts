@@ -2,7 +2,8 @@ import { Repository } from "typeorm";
 import { Announcement } from "../announcement.entity";
 import { AppDataSource } from "../../../data-source";
 import { AnnouncementCreateRequest, AnnouncementResponse } from "../announcement.interfaces";
-import { CreateAnnouncementSchema, GetAnnouncementResponse } from "../announcements.schemas";
+import { CreateAnnouncementSchema, GetAnnouncementSchema } from "../announcement.schemas";
+
 
 export async function createNew(data: AnnouncementCreateRequest): Promise<AnnouncementResponse> {
     const announcementsRepository: Repository<Announcement> = AppDataSource.getRepository(Announcement);
@@ -12,7 +13,7 @@ export async function createNew(data: AnnouncementCreateRequest): Promise<Announ
 
     await announcementsRepository.save(newAnnouncement);
 
-    const parsedAnnouncement = GetAnnouncementResponse.parse(newAnnouncement);
+    const parsedAnnouncement = GetAnnouncementSchema.parse(newAnnouncement);
 
     return parsedAnnouncement;
 };

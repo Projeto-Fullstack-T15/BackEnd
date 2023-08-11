@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { Announcement } from "../announcement.entity";
 import { AppDataSource } from "../../../data-source";
 import { AnnouncementResponse } from "../announcement.interfaces";
-import { GetAnnouncementResponse } from "../announcements.schemas";
+import { GetAnnouncementSchema } from "../announcement.schemas";
 import { AppError } from "../../../errors";
 
 export async function remove(ID: number): Promise<AnnouncementResponse> {
@@ -20,7 +20,7 @@ export async function remove(ID: number): Promise<AnnouncementResponse> {
 
     await announcementsRepository.remove(findAnnouncement);
 
-    const parsedAnnouncement = GetAnnouncementResponse.parse(findAnnouncement);
+    const parsedAnnouncement = GetAnnouncementSchema.parse(findAnnouncement);
 
     return parsedAnnouncement;
 };

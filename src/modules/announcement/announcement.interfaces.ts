@@ -1,6 +1,6 @@
 import { z } from "zod";
 import {
-    GetAnnouncementResponse,
+    GetAnnouncementSchema,
     ListAnnouncementSchema,
     CreateAnnouncementSchema,
     UpdateAnnouncementSchema
@@ -8,5 +8,5 @@ import {
 
 export type AnnouncementCreateRequest = z.infer<typeof CreateAnnouncementSchema>;
 export type AnnouncementUpdateRequest = z.infer<typeof UpdateAnnouncementSchema>;
-export type AnnouncementResponse = z.infer<typeof GetAnnouncementResponse>;
+export type AnnouncementResponse = z.infer<typeof GetAnnouncementSchema>;
 export type AnnouncementListResponse = z.infer<typeof ListAnnouncementSchema>;
