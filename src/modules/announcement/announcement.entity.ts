@@ -2,9 +2,9 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    ManyToOne,
-    JoinColumn,
-    OneToMany,
+    //ManyToOne,
+    //JoinColumn,
+    //OneToMany,
 } from "typeorm";
 // import { User } from "./User";
 // import { Comment } from "./Comment";

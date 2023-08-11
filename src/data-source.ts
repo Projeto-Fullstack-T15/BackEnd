@@ -2,9 +2,9 @@ import "dotenv/config";
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import * as path from "path";
+import { Announcement } from "./modules/announcement/announcement.entity";
 
 const dataSourceConfig = (): DataSourceOptions => {
-    const entitiesPath: string = path.join(__dirname, "./entity/**.{ts,js}");
     const migrationsPath: string = path.join(__dirname, "./migration/**.{ts,js}");
 
     const { DB_TYPE, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
@@ -15,7 +15,7 @@ const dataSourceConfig = (): DataSourceOptions => {
         url: databaseURL,
         synchronize: false,
         logging: false,
-        entities: [entitiesPath],
+        entities: [Announcement],
         migrations: [migrationsPath]
     };
 };
