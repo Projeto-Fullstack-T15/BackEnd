@@ -16,8 +16,6 @@ export const create = async (
     request: Request,
     response: Response
 ): Promise<Response<ParsedAnnouncement>> => {
-    console.log("req body", request.body)
-    console.log("req data", request.parsedData)
     const parsedRequestData = request.parsedData as AnnouncementCreateRequest;
 
     const createdAnnouncement = await services.createNew(parsedRequestData);
