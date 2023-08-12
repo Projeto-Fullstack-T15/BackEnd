@@ -23,5 +23,7 @@ export async function update(
         }
     );
 
-    return announcement;
+    const updatedAnnouncement = await announcementsRepository.findOneBy({ id: announcement.id });
+
+    return updatedAnnouncement!;
 }

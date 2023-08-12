@@ -20,7 +20,7 @@ export const ListAnnouncementSchema = z.object({
     year: z.number(),
     fuelType: z.string(),
     mileage: z.number(),
-    price: z.string(),
+    price: z.number(),
     description: z.string(),
 }).array();
 

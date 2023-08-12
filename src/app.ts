@@ -8,12 +8,16 @@ import { logWithDate } from "./utils/logWithDate.util";
 import { getAllEndpoints } from "./utils/getAllRoutes.util";
 
 const app: Application = express();
+
 app.use(
 	cors({
 		origin: "*",
 		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 	})
 );
+
+app.use(express.json());
+
 
 const routes: Array<Global.interfaces.CustomRoute> = [
 	{ path: "announcements", router: Announcement.router },

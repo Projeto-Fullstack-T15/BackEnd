@@ -2,28 +2,27 @@ import { Request, Response } from "express";
 import { AnnouncementCreateRequest, AnnouncementUpdateRequest, ParsedAnnouncement, ParsedAnnouncementList } from "./announcement.interfaces";
 import * as services from "./services";
 import { GetAnnouncementSchema, ListAnnouncementSchema } from "./announcement.schemas";
-import { z } from "zod";
 
 export const list = async (
     request: Request,
     response: Response
 ): Promise<Response<ParsedAnnouncementList>> => {
     const findAnnouncements = await services.list();
-    const parsedAnnouncements = ListAnnouncementSchema.parse(findAnnouncements);
 
-    return response.status(200).json(parsedAnnouncements);
+    return response.status(200).json(findAnnouncements);
 };
 
 export const create = async (
     request: Request,
     response: Response
 ): Promise<Response<ParsedAnnouncement>> => {
+    console.log("req body", request.body)
+    console.log("req data", request.parsedData)
     const parsedRequestData = request.parsedData as AnnouncementCreateRequest;
 
     const createdAnnouncement = await services.createNew(parsedRequestData);
-    const parsedResponse = GetAnnouncementSchema.parse(createdAnnouncement);
 
-    return response.status(201).json(parsedResponse);
+    return response.status(201).json(createdAnnouncement);
 };
 
 export const update = async (
@@ -33,9 +32,8 @@ export const update = async (
     const parsedRequestData = request.parsedData as AnnouncementUpdateRequest;
 
     const updatedAnnouncement = await services.update(request.announcement, parsedRequestData);
-    const parsedResponse = GetAnnouncementSchema.parse(updatedAnnouncement)
 
-    return response.status(200).json(parsedResponse);
+    return response.status(200).json(updatedAnnouncement);
 };
 
 export const remove = async (
@@ -43,7 +41,6 @@ export const remove = async (
     response: Response
 ): Promise<Response<ParsedAnnouncement>> => {
     const removedAnnouncement = await services.remove(request.announcement);
-    const parsedResponse = GetAnnouncementSchema.parse(removedAnnouncement);
 
-    return response.status(204).json(parsedResponse);
+    return response.status(204).json(removedAnnouncement);
 };

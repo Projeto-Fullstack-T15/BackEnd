@@ -8,4 +8,4 @@ temp/
 .env
 package-lock.json
 yarn.lock
-migration/*
+src/migration/*
