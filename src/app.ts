@@ -7,29 +7,32 @@ import * as Announcement from "./modules/announcement";
 import { logWithDate } from "./utils/logWithDate.util";
 import { getAllEndpoints } from "./utils/getAllRoutes.util";
 
+import * as User from "./modules/user";
+
 const app: Application = express();
 
 app.use(
-	cors({
-		origin: "*",
-		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-	})
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  })
 );
 
 app.use(express.json());
 
-
 const routes: Array<Global.interfaces.CustomRoute> = [
-	{ path: "announcements", router: Announcement.router },
+  { path: "announcements", router: Announcement.router },
+  { path: "users", router: User.router },
+  { path: "user", router: User.router },
 ];
 
 routes.forEach((route) => {
-	const path = `/api/${route.path}`;
-	app.use(path, route.router);
+  const path = `/api/${route.path}`;
+  app.use(path, route.router);
 
-	const endpoints = getAllEndpoints(route.router, path);
+  const endpoints = getAllEndpoints(route.router, path);
 
-	endpoints.forEach((e) => logWithDate(`[ROUTE] ${e}`));
+  endpoints.forEach((e) => logWithDate(`[ROUTE] ${e}`));
 });
 
 app.use(errorHandler);

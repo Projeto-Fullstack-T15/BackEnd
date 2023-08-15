@@ -6,10 +6,10 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { Announcement } from "./Announcement";
-import { Comment } from "./Comment";
-import { Address } from "./Address";
-import { Account } from "./Account";
+import { Announcement } from "../modules/announcement/announcement";
+// import { Comment } from "./Comment";
+// import { Address } from "./Address";
+// import { Account } from "./Account";
 
 @Entity("users")
 export class User {
@@ -23,7 +23,12 @@ export class User {
   CPF: string;
 
   @Column()
+  email: string;
+  @Column()
   Phone: string;
+
+  @Column()
+  Password: string;
 
   @Column({ type: "date" })
   BirthDate: Date;
@@ -34,14 +39,14 @@ export class User {
   @OneToMany(() => Announcement, (announcement) => announcement.user)
   announcements: Announcement[];
 
-  @OneToMany(() => Comment, (comment) => comment.user)
-  comments: Comment[];
+  //   @OneToMany(() => Comment, (comment) => comment.user)
+  //   comments: Comment[];
 
-  @OneToOne(() => Account)
-  @JoinColumn({ name: "AccountID" })
-  account: Account;
+  //   @OneToOne(() => Account)
+  //   @JoinColumn({ name: "AccountID" })
+  //   account: Account;
 
-  @OneToOne(() => Address)
-  @JoinColumn({ name: "AddressID" })
-  address: Address;
+  //   @OneToOne(() => Address)
+  //   @JoinColumn({ name: "AddressID" })
+  //   address: Address;
 }
