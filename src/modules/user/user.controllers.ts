@@ -6,6 +6,7 @@ export const createLogin = async (
   response: Response
 ): Promise<Response<string>> => {
   const loginData: TloginRequest = request.body;
+
   const token: TtokenLoginResponse = await services.createLoginService(
     loginData
   );
