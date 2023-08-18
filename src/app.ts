@@ -23,7 +23,6 @@ app.use(express.json());
 const routes: Array<Global.interfaces.CustomRoute> = [
   { path: "announcements", router: Announcement.router },
   { path: "users", router: User.router },
-  { path: "user", router: User.router },
 ];
 
 routes.forEach((route) => {

@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";
 import * as path from "path";
 import { Announcement } from "./modules/announcement/announcement";
-import { User } from "./entity/User";
+import { User } from "../src/entity/User";
 // import { User } from "./entity/User";
 // import { Account } from "./entity/Account";
 // import { Address } from "./entity/Address";
@@ -15,7 +15,7 @@ const dataSourceConfig = (): DataSourceOptions => {
   const { DB_TYPE, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } =
     process.env;
   const databaseURL = `${DB_TYPE}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-
+  console.log(databaseURL);
   return {
     type: DB_TYPE as "postgres" | "mysql",
     url: databaseURL,
