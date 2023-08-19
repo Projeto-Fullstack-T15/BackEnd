@@ -1,3 +1,4 @@
+import "express-async-errors";
 import express, { Application } from "express";
 import cors from "cors";
 import { errorHandler } from "./errors";
@@ -6,7 +7,6 @@ import { getAllEndpoints } from "./utils/getAllRoutes.util";
 import * as global from "./modules/global";
 import * as announcement from "./modules/announcement";
 import * as account from "./modules/account";
-import "express-async-errors";
 
 const app: Application = express();
 

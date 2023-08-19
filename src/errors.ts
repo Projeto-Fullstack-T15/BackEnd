@@ -13,20 +13,6 @@ export class AppError extends Error {
     }
 }
 
-export class RequestError extends Error {
-    public status: number;
-    public message: string;
-
-    constructor(
-        status: number = 500,
-        message: string = "Unknown problem in server, contact developers."
-    ) {
-        super();
-        this.status = status;
-        this.message = message;
-    }
-}
-
 export function errorHandler(
     error: Error,
     request: Request,
@@ -37,8 +23,8 @@ export function errorHandler(
         return response.status(400).json({ message: error.flatten().fieldErrors });
     };
 
-    if (error instanceof RequestError) {
-        return response.status(error.status).json({ message: error.message });
+    if (error instanceof AppError) {
+        return response.status(error.statusCode).json({ message: error.message });
     }
 
     logWithDate(`An error ocurred during a request... ${request.method.toUpperCase()} ${request.protocol}://${request.hostname}${request.path}`);
