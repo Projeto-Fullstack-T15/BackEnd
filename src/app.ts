@@ -1,37 +1,34 @@
-import "express-async-errors";
 import express, { Application } from "express";
-import { errorHandler } from "./errors";
 import cors from "cors";
-import * as Global from "./modules/global";
-import * as Announcement from "./modules/announcement";
+import { errorHandler } from "./errors";
 import { logWithDate } from "./utils/logWithDate.util";
 import { getAllEndpoints } from "./utils/getAllRoutes.util";
-
-import * as User from "./modules/user";
+import * as global from "./modules/global";
+import * as announcement from "./modules/announcement";
+import * as account from "./modules/account";
+import "express-async-errors";
 
 const app: Application = express();
 
 app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-  })
+	cors({
+		origin: "*",
+		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+	})
 );
 
 app.use(express.json());
 
-const routes: Array<Global.interfaces.CustomRoute> = [
-  { path: "announcements", router: Announcement.router },
-  { path: "users/login", router: User.router },
+const routes: Array<global.interfaces.CustomRoute> = [
+	{ path: "accounts", router: account.router },
+	{ path: "announcements", router: announcement.router },
 ];
 
 routes.forEach((route) => {
-  const path = `/api/${route.path}`;
-  app.use(path, route.router);
-
-  const endpoints = getAllEndpoints(route.router, path);
-
-  endpoints.forEach((e) => logWithDate(`[ROUTE] ${e}`));
+	const path = `/api/${route.path}`;
+	const endpoints = getAllEndpoints(route.router, path);
+	endpoints.forEach((e) => logWithDate(`[ROUTE] ${e}`));
+	app.use(path, route.router);
 });
 
 app.use(errorHandler);

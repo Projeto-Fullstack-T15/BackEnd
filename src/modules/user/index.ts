@@ -1,3 +1,3 @@
-import { userLoginRouter as router } from "./user.routes";
+import * as services from "./services";
 
-export { router };
+export { services };

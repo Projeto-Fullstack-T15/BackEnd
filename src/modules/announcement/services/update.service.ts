@@ -9,7 +9,7 @@ export async function update(
 ): Promise<Announcement> {
 	const announcementsRepository: Repository<Announcement> = AppDataSource.getRepository(Announcement);
 
-	await announcementsRepository.update(announcement, {
+	await announcementsRepository.update(announcement.id, {
 		brand: updateData.brand ?? announcement.brand,
 		model: updateData.model ?? announcement.model,
 		color: updateData.color ?? announcement.color,

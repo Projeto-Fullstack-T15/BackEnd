@@ -1,22 +1,20 @@
 import { Router } from "express";
 
 export function getAllEndpoints(router: Router, path?: string) {
-  const endpoints: Array<string> = [];
+    const endpoints: Array<string> = [];
 
-  if (router && router.stack) {
-    router.stack.forEach((layer) => {
-      if (layer.route) {
-        const subPath = layer.route.path;
-        const methods = Object.keys(layer.route.methods);
+    if (router && router.stack) {
+        router.stack.forEach((layer) => {
+            if (layer.route) {
+                const subPath = layer.route.path;
+                const methods = Object.keys(layer.route.methods);
 
-        methods.forEach((method) => {
-          endpoints.push(`${method.toUpperCase()} ${path}${subPath}`);
+                methods.forEach((method) => {
+                    endpoints.push(`${method.toUpperCase().padEnd(6, " ")} ${path}${subPath}`);
+                });
+            }
         });
-      }
-    });
-  } else {
-    console.error("Router or router.stack is undefined or not valid.");
-  }
+    }
 
-  return endpoints;
+    return endpoints;
 }

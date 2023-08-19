@@ -6,6 +6,7 @@ import {
     JoinColumn
 } from "typeorm";
 import { User } from "../user/user.entity";
+import { Account } from "../account/account.entity";
 //import { Comment } from "../../entity/Comment";
 
 @Entity("announcements")
@@ -37,9 +38,9 @@ export class Announcement {
     @Column("text")
     description: string;
 
-    @ManyToOne(() => User, (user) => user.announcements)
-    @JoinColumn({ name: "UserID" })
-    user: User;
+    @ManyToOne(() => Account, (account) => account.announcements)
+    @JoinColumn({ name: "accountId" })
+    user: Account;
 
     //@OneToMany(() => Comment, (comment) => comment.announcement)
     // comments: Comment[];

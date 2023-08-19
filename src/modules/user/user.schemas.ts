@@ -1,13 +1,8 @@
 import { z } from "zod";
-export const createLoginSchema = z.object({
-  email: z.string().max(45).email(),
-  password: z.string().max(120),
-});
-export const createTokenResponseSchema = z.object({
-  token: z.string(),
-});
 
-export const loggedInClient = z.object({
-  email: z.string().email(),
-  ID: z.number(),
+export const CreateUserSchema = z.object({
+	name: z.string().min(3).max(30),
+	cpf: z.string().length(11),
+	birthday: z.date(),
+	description: z.string().max(300),
 });

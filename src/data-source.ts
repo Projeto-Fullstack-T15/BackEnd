@@ -4,6 +4,8 @@ import { DataSource, DataSourceOptions } from "typeorm";
 import * as path from "path";
 import { Announcement } from "./modules/announcement/announcement.entity";
 import { User } from "./modules/user/user.entity";
+import { Account } from "./modules/account/account.entity";
+import { Address } from "./modules/address/address.entity";
 
 const dataSourceConfig = (): DataSourceOptions => {
 	const migrationsPath: string = path.join(__dirname, "./migration/**.{ts,js}");
@@ -16,7 +18,7 @@ const dataSourceConfig = (): DataSourceOptions => {
 		url: databaseURL,
 		synchronize: false,
 		logging: false,
-		entities: [Announcement, User],
+		entities: [Announcement, Account, Address, User],
 		migrations: [migrationsPath],
 	};
 };
