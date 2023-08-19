@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { Account } from "../account/account.entity";
 
 @Entity("addresses")
@@ -25,5 +25,6 @@ export class Address {
     complement: string | null;
 
     @OneToOne(() => Account, (account) => account.address)
+    @JoinColumn({ name: "accountId" })
     account: Account;
 }

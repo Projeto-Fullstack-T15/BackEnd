@@ -3,7 +3,6 @@ import {
     PrimaryGeneratedColumn,
     Column,
     OneToOne,
-    JoinColumn,
     OneToMany,
 } from "typeorm";
 import { User } from "../user/user.entity";
@@ -25,18 +24,17 @@ export class Account {
     @Column()
     phone: string;
 
-    @Column({})
+    @Column({ enum: ["buyer", "announcer"], enumName: "AccountType" })
     accountType: AccountType;
 
-    @OneToOne(() => User)
-    @JoinColumn({ name: "userId" })
-    user: User;
 
     @OneToMany(() => Announcement, (announcement) => announcement.user)
     announcements: Announcement[];
 
-    @OneToOne(() => Address)
-    @JoinColumn({ name: "addressId" })
+    @OneToOne(() => User, (user) => user.account)
+    user: User;
+
+    @OneToOne(() => Address, (address) => address.account)
     address: Address;
 
     //   @OneToMany(() => Comment, (comment) => comment.user)

@@ -12,5 +12,3 @@ export const CreateAccountSchema = z.object({
 });
 
 export const LoginAccountSchema = CreateAccountSchema.pick({ email: true, password: true });
-export const RetrieveAccountSchema = CreateAccountSchema.omit({ password: true });
-
