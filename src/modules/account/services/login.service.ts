@@ -5,6 +5,7 @@ import { AppDataSource } from "../../../data-source";
 import { AppError } from "../../../errors";
 import { Account } from "../account.entity";
 import "dotenv/config";
+import { compare } from 'bcryptjs';
 
 const INVALID_CREDENTIALS_MESSAGE = "Invalid credentials";
 const TOKEN_EXPIRATION_TIME = String(process.env.JWT_EXPIRATION_TIME) || "24h";
@@ -16,7 +17,8 @@ export const login = async (
 	const accountRepository: Repository<Account> = AppDataSource.getRepository(Account);
 	const findAccount: Account | null = await accountRepository.findOne({ where: { email: input.email } });
 
-	if (!findAccount || input.password !== findAccount.password) {
+
+	if (!findAccount || !await compare(input.password, findAccount.password)) {
 		throw new AppError(INVALID_CREDENTIALS_MESSAGE, 401);
 	}
 

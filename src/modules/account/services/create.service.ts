@@ -22,13 +22,16 @@ export const create = async (
     const newUser = await userModule.services.create(user, newAccount);
     const newAddress = await addressModule.services.create(address, newAccount);
 
+    const { account: userAcc, ...userWithoutAcc } = newUser;
+    const { account: addressAcc, ...addressWithoutAcc } = newAddress;
+
     const createdAccount = {
         ...newAccount,
-        user: newUser,
-        address: newAddress
+        user: userWithoutAcc,
+        address: addressWithoutAcc
     }
 
     const { password, ...createdAccountResponse } = createdAccount;
 
-    return createdAccountResponse;
+    return createdAccountResponse as CreateAccountResponse;
 }

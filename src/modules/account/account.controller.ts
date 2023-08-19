@@ -17,7 +17,7 @@ export const create = async (
 	response: Response
 ): Promise<Response> => {
 	const accountData: CreateAccountRequest = request.parsedData;
-	const accountResponse = services.create(accountData);
+	const accountResponse = await services.create(accountData);
 
 	return response.status(201).json(accountResponse);
 }
