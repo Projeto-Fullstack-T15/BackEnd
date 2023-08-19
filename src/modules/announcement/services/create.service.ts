@@ -1,16 +1,15 @@
 import { Repository } from "typeorm";
-import { Announcement } from "../announcement";
 import { AppDataSource } from "../../../data-source";
 import { AnnouncementCreateRequest } from "../announcement.interfaces";
+import { Announcement } from "../announcement.entity";
 
 export async function createNew(
-  data: AnnouncementCreateRequest
+	data: AnnouncementCreateRequest
 ): Promise<Announcement> {
-  const announcementsRepository: Repository<Announcement> =
-    AppDataSource.getRepository(Announcement);
+	const announcementsRepository: Repository<Announcement> = AppDataSource.getRepository(Announcement);
 
-  const newAnnouncement: Announcement = announcementsRepository.create(data);
-  await announcementsRepository.save(newAnnouncement);
+	const newAnnouncement: Announcement = announcementsRepository.create(data);
+	await announcementsRepository.save(newAnnouncement);
 
-  return newAnnouncement;
+	return newAnnouncement;
 }
