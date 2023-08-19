@@ -6,7 +6,7 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { Announcement } from "../modules/announcement/announcement";
+import { Announcement } from "../announcement/announcement.entity";
 // import { Comment } from "./Comment";
 // import { Address } from "./Address";
 // import { Account } from "./Account";
