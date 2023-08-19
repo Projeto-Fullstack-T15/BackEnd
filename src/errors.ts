@@ -34,7 +34,6 @@ export function errorHandler(
     nextFunction: NextFunction
 ): Response {
     if (error instanceof ZodError) {
-        console.error(error)
         return response.status(400).json({ message: error.flatten().fieldErrors });
     };
 
