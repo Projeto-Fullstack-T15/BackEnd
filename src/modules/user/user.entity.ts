@@ -15,7 +15,7 @@ export class User {
 	@Column()
 	name: string;
 
-	@Column({ unique: true })
+	@Column({ type: "varchar", length: 11, unique: true })
 	cpf: string;
 
 	@Column({ type: "date" })
@@ -24,7 +24,7 @@ export class User {
 	@Column({ type: "text" })
 	description: string;
 
-	@OneToOne(() => Account, (account) => account.user)
-	@JoinColumn({ name: "accountId" })
+	@OneToOne(() => Account, (account) => account.user, { cascade: true })
+	@JoinColumn()
 	account: Account;
 }

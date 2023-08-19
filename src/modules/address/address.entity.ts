@@ -24,7 +24,7 @@ export class Address {
     @Column({ nullable: true, type: "varchar", length: 255 })
     complement: string | null;
 
-    @OneToOne(() => Account, (account) => account.address)
-    @JoinColumn({ name: "accountId" })
+    @OneToOne(() => Account, (account) => account.address, { cascade: true })
+    @JoinColumn()
     account: Account;
 }

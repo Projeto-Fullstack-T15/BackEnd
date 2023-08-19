@@ -4,11 +4,16 @@ import {
     Column,
     OneToOne,
     OneToMany,
+    JoinColumn,
 } from "typeorm";
 import { User } from "../user/user.entity";
-import { AccountType } from "./account.interfaces";
 import { Announcement } from "../announcement/announcement.entity";
 import { Address } from "../address/address.entity";
+
+export enum AccountType {
+    BUYER = "buyer",
+    ANNOUNCER = "announcer"
+}
 
 @Entity("accounts")
 export class Account {
@@ -24,11 +29,10 @@ export class Account {
     @Column()
     phone: string;
 
-    @Column({ enum: ["buyer", "announcer"], enumName: "AccountType" })
-    accountType: AccountType;
+    @Column({ type: "enum", enum: AccountType })
+    accountType: "buyer" | "announcer";
 
-
-    @OneToMany(() => Announcement, (announcement) => announcement.user)
+    @OneToMany(() => Announcement, (announcement) => announcement.account)
     announcements: Announcement[];
 
     @OneToOne(() => User, (user) => user.account)
@@ -36,7 +40,4 @@ export class Account {
 
     @OneToOne(() => Address, (address) => address.account)
     address: Address;
-
-    //   @OneToMany(() => Comment, (comment) => comment.user)
-    //   comments: Comment[];
 }
