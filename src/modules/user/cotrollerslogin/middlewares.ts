@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { RequestError } from "../../../errors";
+
 import { Repository } from "typeorm";
 
 import { AppDataSource } from "../../../data-source";
 import { User } from "../../../entity/User";
-import { AppError } from "../../../errors";
+import { AppError, RequestError } from "../../../errors";
 
 export async function verifyIdMiddUser(
   req: Request,
@@ -20,7 +20,7 @@ export async function verifyIdMiddUser(
   });
 
   if (!user) {
-    throw new AppError("User not found", 404);
+    throw new RequestError(404, "User not found");
   }
 
   next();
@@ -33,12 +33,12 @@ export const verifyTokenValidMidd = async (
 ): Promise<void> => {
   let token = req.headers.authorization;
   if (!token) {
-    throw new AppError("Invalid credentials", 401);
+    throw new RequestError(401, "Invalid credentials");
   }
   token = token.split(" ")[1];
   jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
     if (err) {
-      throw new AppError(err.message, 401);
+      throw new RequestError(401, "Invalid credentials");
     }
 
     res.locals = {
