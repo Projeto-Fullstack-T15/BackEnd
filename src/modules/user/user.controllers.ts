@@ -1,15 +1,17 @@
+import * as controllers from "./user.controllers";
+import * as middlewares from "../../modules/user/cotrollerslogin/middlewares";
+import * as global from "../global";
 import { Request, Response } from "express";
-import * as services from "./servicesUser/services";
-import { TloginRequest, TtokenLoginResponse } from "./user.interface";
-export const createLogin = async (
+import { Router } from "express";
+import { User } from "../../entity/User";
+import * as services from "./servicesUser/servicesUser";
+
+export const removeUser = async (
   request: Request,
   response: Response
-): Promise<Response<string>> => {
-  const loginData: TloginRequest = request.body;
+): Promise<Response<User>> => {
+  const id: number = parseInt(request.params.id);
+  const removeUser = await services.deleteUserService(id);
 
-  const token: TtokenLoginResponse = await services.createLoginService(
-    loginData
-  );
-
-  return response.status(201).json(token);
+  return response.status(204).json(removeUser);
 };

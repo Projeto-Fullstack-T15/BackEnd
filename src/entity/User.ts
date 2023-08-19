@@ -34,7 +34,7 @@ export class User {
   BirthDate: Date;
 
   @Column("text")
-  Description: string;
+  Description: string | Date;
 
   @OneToMany(() => Announcement, (announcement) => announcement.user)
   announcements: Announcement[];

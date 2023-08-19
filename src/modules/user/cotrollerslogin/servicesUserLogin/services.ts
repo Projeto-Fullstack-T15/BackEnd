@@ -1,11 +1,11 @@
-import { AppDataSource } from "../../../data-source";
-import { AppError } from "../../../errors";
+import { AppDataSource } from "../../../../data-source";
+import { AppError } from "../../../../errors";
 import { compare, hash } from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import "dotenv/config";
 import { Repository } from "typeorm";
-import { User } from "../../../entity/User";
-import { TloginRequest, TreturnLogin } from "../user.interface";
+import { User } from "../../../../entity/User";
+import { TloginRequest, TreturnLogin } from "../user.login.interface";
 import format from "pg-format";
 import { QueryResult } from "pg";
 

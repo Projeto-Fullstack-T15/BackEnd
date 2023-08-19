@@ -1,14 +1,20 @@
 import * as controllers from "./user.controllers";
 
-import * as middlewares from "./user.midddlewares";
 import * as global from "../global";
+import * as middlewares from "../../modules/user/cotrollerslogin/middlewares";
 import Router from "express";
-import { createLoginSchema } from "./user.schemas";
+export const userRoutes = Router();
+// userRoutes.patch(
+//     "/:id",
+//     global.middlewares.parseBodyWith(UpdateAnnouncementSchema),
+//     middlewares.verifyIdMiddUser,
+//     controllers.update
+// );
 
-export const userLoginRouter = Router();
-
-userLoginRouter.post(
-  "",
-  global.middlewares.parseBodyWith(createLoginSchema),
-  controllers.createLogin
+userRoutes.delete(
+  "/:id",
+  middlewares.verifyIdMiddUser,
+  middlewares.verifyTokenValidMidd,
+  middlewares.verifyUserLogging,
+  controllers.removeUser
 );

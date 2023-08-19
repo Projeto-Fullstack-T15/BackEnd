@@ -6,8 +6,8 @@ import * as Global from "./modules/global";
 import * as Announcement from "./modules/announcement";
 import { logWithDate } from "./utils/logWithDate.util";
 import { getAllEndpoints } from "./utils/getAllRoutes.util";
-
-import * as User from "./modules/user";
+import * as servicesUser from "./modules/user/servicesUser";
+import * as User from "./modules/user/cotrollerslogin";
 
 const app: Application = express();
 
@@ -23,6 +23,7 @@ app.use(express.json());
 const routes: Array<Global.interfaces.CustomRoute> = [
   { path: "announcements", router: Announcement.router },
   { path: "users/login", router: User.router },
+  { path: "users/delete", router: servicesUser.router },
 ];
 
 routes.forEach((route) => {
