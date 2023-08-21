@@ -24,6 +24,8 @@ const routes: Array<Global.interfaces.CustomRoute> = [
   { path: "announcements", router: Announcement.router },
   { path: "users/login", router: User.router },
   { path: "users/delete", router: servicesUser.router },
+  { path: "users/resetPassword", router: servicesUser.router },
+  { path: "users/new-password", router: servicesUser.router },
 ];
 
 routes.forEach((route) => {

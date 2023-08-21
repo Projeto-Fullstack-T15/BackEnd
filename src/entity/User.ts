@@ -31,11 +31,12 @@ export class User {
   Password: string;
 
   @Column({ type: "date" })
-  BirthDate: Date;
+  BirthDate: string | Date;
 
   @Column("text")
-  Description: string | Date;
-
+  Description: string;
+  @Column({ nullable: true })
+  token?: string;
   @OneToMany(() => Announcement, (announcement) => announcement.user)
   announcements: Announcement[];
 
