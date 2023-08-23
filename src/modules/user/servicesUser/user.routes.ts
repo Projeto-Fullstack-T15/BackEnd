@@ -1,7 +1,6 @@
 import * as controllers from "./user.controllers";
-
-import * as global from "../global";
-import * as middlewares from "../../modules/user/cotrollerslogin/middlewares";
+import * as global from "../../global";
+import * as middlewares from "../cotrollerslogin/middlewares";
 import Router from "express";
 import { SchemaUpdateUserRequest } from "./user.schemas";
 export const userRoutes = Router();
@@ -9,7 +8,6 @@ userRoutes.patch(
   "/:id",
   global.middlewares.parseBodyWith(SchemaUpdateUserRequest),
   middlewares.verifyIdMiddUser
-  // controllers.updateUsers
 );
 
 userRoutes.delete(
@@ -21,3 +19,10 @@ userRoutes.delete(
 );
 userRoutes.post("", controllers.forgetPassword);
 userRoutes.post("/:token", controllers.newPassword);
+
+userRoutes.get(
+  "/:id/Announcement",
+  middlewares.verifyIdMiddUser,
+  middlewares.verifyTokenValidMidd,
+  controllers.listUserAnnouncementControllers
+);

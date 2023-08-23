@@ -2,28 +2,27 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../../data-source";
 import { Announcement } from "../announcement";
 import { AnnouncementUpdateRequest } from "../announcement.interfaces";
+import { AppError, RequestError } from "../../../errors";
 
 export async function update(
-  announcement: Announcement,
+  id: number,
   updateData: AnnouncementUpdateRequest
 ): Promise<Announcement> {
   const announcementsRepository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
 
-  await announcementsRepository.update(announcement, {
-    brand: updateData.brand ?? announcement.brand,
-    model: updateData.model ?? announcement.model,
-    color: updateData.color ?? announcement.color,
-    year: updateData.year ?? announcement.year,
-    fuelType: updateData.fuelType ?? announcement.fuelType,
-    mileage: updateData.mileage ?? announcement.mileage,
-    price: updateData.price ?? announcement.price,
-    description: updateData.description ?? announcement.description,
-  });
-
   const updatedAnnouncement = await announcementsRepository.findOneBy({
-    id: announcement.id,
+    id: id,
   });
+  if (!updatedAnnouncement) {
+    throw new AppError("Announcement not found", 404);
+  }
+  const transform = Object.assign(updatedAnnouncement, {
+    ...updateData,
+  });
+  const newUserData: Announcement = await announcementsRepository.save(
+    transform
+  );
 
-  return updatedAnnouncement!;
+  return newUserData!;
 }

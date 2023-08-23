@@ -8,7 +8,7 @@ import { logWithDate } from "./utils/logWithDate.util";
 import { getAllEndpoints } from "./utils/getAllRoutes.util";
 import * as servicesUser from "./modules/user/servicesUser";
 import * as User from "./modules/user/cotrollerslogin";
-
+import * as listUserAnnouncement from "./modules/user/servicesUser";
 const app: Application = express();
 
 app.use(
@@ -26,6 +26,7 @@ const routes: Array<Global.interfaces.CustomRoute> = [
   { path: "users/delete", router: servicesUser.router },
   { path: "users/resetPassword", router: servicesUser.router },
   { path: "users/new-password", router: servicesUser.router },
+  { path: "users/", router: listUserAnnouncement.router },
 ];
 
 routes.forEach((route) => {

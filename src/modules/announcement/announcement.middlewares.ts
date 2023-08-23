@@ -1,9 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "../../errors";
+import { AppError, RequestError } from "../../errors";
 import { Repository } from "typeorm";
 import { Announcement } from "./announcement";
 import { AppDataSource } from "../../data-source";
-
+import {
+  verifyUserLogging,
+  verifyIdMiddUser,
+  verifyTokenValidMidd,
+} from "../user/cotrollerslogin/middlewares";
+export { verifyIdMiddUser, verifyUserLogging, verifyTokenValidMidd };
 export const ensureAnnouncementExists = async (
   request: Request,
   response: Response,
@@ -12,7 +17,7 @@ export const ensureAnnouncementExists = async (
   const id: number = Number(request.params.id);
 
   if (isNaN(id) || id.toFixed() !== String(id)) {
-    throw new AppError("Wrong parameter ID: it should be an intenger", 400);
+    throw new RequestError(400, "Wrong parameter ID: it should be an intenger");
   }
 
   const announcementsRepository: Repository<Announcement> =
@@ -28,5 +33,3 @@ export const ensureAnnouncementExists = async (
 
   nextFunction();
 };
-
-

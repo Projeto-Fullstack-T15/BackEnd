@@ -1,16 +1,8 @@
-import * as controllers from "./user.controllers";
-import * as middlewares from "../../modules/user/cotrollerslogin/middlewares";
-import * as global from "../global";
 import { Request, Response } from "express";
-import { Router } from "express";
-import { User } from "../../entity/User";
-import * as services from "./servicesUser/servicesUser";
-import {
-  userUpdateRequest,
-  userUpdateResponse,
-} from "./servicesUser/user.interfaces";
-import { SchemaUpdateUserResponse } from "./user.schemas";
 
+import { User } from "../../../entity/User";
+import * as services from "./index.user";
+import * as servicesListUserAnnounc from "./recover.function.index";
 export const removeUser = async (
   request: Request,
   response: Response
@@ -20,15 +12,7 @@ export const removeUser = async (
 
   return response.status(204).json(removeUser);
 };
-// export const updateUsers = async (
-//   req: Request,
-//   res: Response
-// ): Promise<Response> => {
-//   const Data: userUpdateRequest = req.body;
-//   const id: number = parseInt(req.params.id);
-//   const updateUser: UserInterface = await updateUsers(Data, id);
-//   return res.status(200).json(updateUser);
-// };
+
 export const forgetPassword = async (
   req: Request,
   res: Response
@@ -49,5 +33,15 @@ export const newPassword = async (
   const { token } = req.params;
   const sendEmail = await services.newUpdate(password, token);
 
-  return res.status(200).json("senha alterada com sucesso");
+  return res.status(200).json(sendEmail);
+};
+
+export const listUserAnnouncementControllers = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const id = Number(req.params.id);
+  console.log(id);
+  const send = await servicesListUserAnnounc.listUserAnnouncement(id);
+  return res.status(200).json(send);
 };

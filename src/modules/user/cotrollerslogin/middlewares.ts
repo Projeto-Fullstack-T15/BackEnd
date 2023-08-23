@@ -20,7 +20,7 @@ export async function verifyIdMiddUser(
   });
 
   if (!user) {
-    throw new RequestError(404, "User not found");
+    throw new AppError("User not found", 404);
   }
 
   next();
@@ -33,12 +33,12 @@ export const verifyTokenValidMidd = async (
 ): Promise<void> => {
   let token = req.headers.authorization;
   if (!token) {
-    throw new RequestError(401, "Invalid credentials");
+    throw new AppError("Invalid credentials", 401);
   }
   token = token.split(" ")[1];
   jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
     if (err) {
-      throw new RequestError(401, "Invalid credentials");
+      throw new AppError("Invalid credentials", 401);
     }
 
     res.locals = {
@@ -58,7 +58,7 @@ export const verifyUserLogging = async (
   const id = parseInt(req.params.id);
 
   if (parseInt(decoded.sub) !== id) {
-    const error = new RequestError(403, "Access forbidden");
+    const error = new AppError("Access forbidden", 403);
     return next(error);
   }
   return next();

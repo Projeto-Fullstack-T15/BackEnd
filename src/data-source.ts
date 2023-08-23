@@ -4,10 +4,6 @@ import { DataSource, DataSourceOptions } from "typeorm";
 import * as path from "path";
 import { Announcement } from "./modules/announcement/announcement";
 import { User } from "../src/entity/User";
-// import { User } from "./entity/User";
-// import { Account } from "./entity/Account";
-// import { Address } from "./entity/Address";
-//import { User } from "./entity/User";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const migrationsPath: string = path.join(__dirname, "./migration/**.{ts,js}");

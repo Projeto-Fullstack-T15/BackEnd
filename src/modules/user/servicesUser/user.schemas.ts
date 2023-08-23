@@ -15,13 +15,3 @@ export const SchemaUpdateUserRequest = z
     Password: true,
   })
   .partial();
-export const SchemaUpdateUserResponse = z.object({
-  ID: z.number(),
-  Name: z.string(),
-  CPF: z.string(),
-  email: z.string(),
-  Phone: z.string(),
-  Password: z.string(),
-  BirthDate: z.string().optional(),
-  description: z.string(),
-});

@@ -6,8 +6,6 @@ import "dotenv/config";
 import { Repository } from "typeorm";
 import { User } from "../../../../entity/User";
 import { TloginRequest, TreturnLogin } from "../user.login.interface";
-import format from "pg-format";
-import { QueryResult } from "pg";
 
 export const createLoginService = async (
   loginData: TloginRequest
@@ -18,7 +16,6 @@ export const createLoginService = async (
       email: loginData.email,
     },
   });
-  console.log(user);
 
   if (!user) {
     throw new AppError("Invalid credentials", 401);
@@ -30,10 +27,10 @@ export const createLoginService = async (
     throw new AppError("Invalid credentials", 401);
   }
 
- const token: string = jwt.sign(
+  const token: string = jwt.sign(
     {
       user: user.ID,
-    }, 
+    },
     String(process.env.SECRET_KEY!),
     {
       expiresIn: "24h",
