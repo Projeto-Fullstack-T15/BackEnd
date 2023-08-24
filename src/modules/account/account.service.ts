@@ -1,16 +1,18 @@
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { AccountRepository } from './repositories/account.repository';
 import { Account } from './entities/account.entity';
 import { plainToInstance } from 'class-transformer';
 import { JwtService } from '@nestjs/jwt';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class AccountService {
 	constructor(
 		private readonly repository: AccountRepository,
-		private readonly jwtService: JwtService
+		private readonly jwtService: JwtService,
+		private readonly emailService: EmailService
 	) { }
 
 	public async createNew(data: CreateAccountDto): Promise<Account> {
@@ -78,6 +80,46 @@ export class AccountService {
 		const token = this.jwtService.sign({ email, isAnnouncer: account.account_type === "ANNOUNCER" }, { subject: String(account.id) });
 
 		return token;
+	}
+
+	public async sendRecoveryEmail(email: string): Promise<boolean> {
+		const findUser = await this.repository.findAccount({ email });
+		if (!findUser) {
+			throw new NotFoundException("Email isnt registered");
+		}
+
+		const token = this.jwtService.sign({ email });
+		const recoveryLink = `${process.env.FRONTEND_RECOVER_URL}?token=${token}`;
+
+		try {
+			await this.emailService.sendMail(
+				email,
+				'Password Recovery',
+				`Click on this link to reset your password: ${recoveryLink}`
+			);
+
+			return;
+		} catch {
+			throw new InternalServerErrorException("Failed to send en");
+		}
+	}
+
+	public async resetPassword(token: string, newPassword: string) {
+		try {
+			const decoded = this.jwtService.verify(token);
+			const email = decoded.email;
+
+			const findUser = await this.repository.findAccount({ email });
+			if (!findUser) {
+				throw new Error();
+			}
+
+			await this.repository.updateAccount(findUser, { password: newPassword });
+
+			return;
+		} catch (error) {
+			throw new UnauthorizedException("Invalid token");
+		}
 	}
 }
 

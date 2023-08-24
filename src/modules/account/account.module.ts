@@ -10,6 +10,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { EmailService } from 'src/email/email.service';
 
 @Module({
 	controllers: [
@@ -20,6 +21,7 @@ import { JwtModule } from '@nestjs/jwt';
 		AccountService,
 		LocalStrategy,
 		JwtStrategy,
+		EmailService,
 		{
 			provide: AccountRepository,
 			useClass: AccountPrismaRepository

@@ -7,6 +7,7 @@ import { AddressService } from '../address/address.service';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { LocalAuthGuard } from './guards/local.guard';
 import { JwtAuthGuard } from './guards/jwt.guard';
+import { RecoverAccountDto, SendRecoverEmailDto } from './dto/recover-account.dto';
 
 @Controller('api/accounts')
 export class AccountController {
@@ -90,5 +91,19 @@ export class AccountController {
 		const token = await this.accountService.generateToken(email);
 
 		return { token };
+	}
+
+	@Get('password/recover')
+	public async sendRecoveryEmail(@Body() data: SendRecoverEmailDto) {
+		await this.accountService.sendRecoveryEmail(data.email);
+
+		return;
+	}
+
+	@Post('password/reset')
+	public async resetPassword(@Body() data: RecoverAccountDto) {
+		await this.accountService.resetPassword(data.token, data.newPassword);
+
+		return;
 	}
 }
