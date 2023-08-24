@@ -1,0 +1,1568 @@
+{
+	"info": {
+		"_postman_id": "56cd3782-ee4a-4a83-9259-175481d63af6",
+		"name": "Projetct's API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29095863",
+		"_collection_link": "https://kenzie-fullstack.postman.co/workspace/Backend-API~360b0329-f821-453c-8955-050f8a7cdf20/collection/29095863-56cd3782-ee4a-4a83-9259-175481d63af6?action=share&source=collection_link&creator=29095863"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"r.granatodutre@gmail.com\",\r\n    \"password\": \"teste123\",\r\n    \"phone\": \"+5551984449212\",\r\n    \"account_type\": \"ANNOUNCER\",\r\n    \"user\": {\r\n        \"name\": \"Renan Dutra\",\r\n        \"cpf\": \"49072749049\",\r\n        \"birthday\": \"2000-02-16T03:00:00.000Z\",\r\n        \"description\": \"\"\r\n    },\r\n    \"address\": {\r\n        \"zip_code\": \"92120131\",\r\n        \"state\": \"Rio Grande do Sul\",\r\n        \"city\": \"Canoas\",\r\n        \"street\": \"Rua Capistrano de Abreu\",\r\n        \"number\": \"1088\",\r\n        \"complement\": \"Casa 02\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"r.granatodutra@gmail.com\",\r\n    \"password\": \"teste123\",\r\n    \"phone\": \"+5551984449218\",\r\n    \"accountType\": \"announcer\",\r\n    \"user\": {\r\n        \"name\": \"Renan Dutra\",\r\n        \"cpf\": \"60012643092\",\r\n        \"birthday\": \"2000-02-16T03:00:00.000Z\",\r\n        \"description\": \"\"\r\n    },\r\n    \"address\": {\r\n        \"zipCode\": \"92120131\",\r\n        \"state\": \"Rio Grande do Sul\",\r\n        \"city\": \"Canoas\",\r\n        \"street\": \"Rua Capistrano de Abreu\",\r\n        \"number\": \"1088\",\r\n        \"complement\": \"Casa 02\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "364"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16c-hLBMUxsnKRvhYcxYCNLggmjjyaw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Aug 2023 20:38:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"r.granatodutra@gmail.com\",\n    \"phone\": \"+5551984449218\",\n    \"accountType\": \"announcer\",\n    \"id\": 7,\n    \"user\": {\n        \"name\": \"Renan Dutra\",\n        \"cpf\": \"60012643092\",\n        \"birthday\": \"2000-02-16T03:00:00.000Z\",\n        \"description\": \"\",\n        \"id\": 3\n    },\n    \"address\": {\n        \"zipCode\": \"92120131\",\n        \"state\": \"Rio Grande do Sul\",\n        \"city\": \"Canoas\",\n        \"street\": \"Rua Capistrano de Abreu\",\n        \"number\": \"1088\",\n        \"complement\": \"Casa 02\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"login_token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"r.granatodutre@gmail.com\",\r\n    \"password\": \"teste123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/accounts/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"r.granatodutre@gmail.com\",\r\n    \"password\": \"teste123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "227"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e3-cBHRu18hL/mtGUBECn57PvJRh8w\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:12:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InIuZ3JhbmF0b2R1dHJlQGdtYWlsLmNvbSIsImlzQW5ub3VuY2VyIjp0cnVlLCJpYXQiOjE2OTI4NTM5NTksImV4cCI6MTY5Mjk0MDM1OSwic3ViIjoiMTIifQ.zPxMb7uiB0Qt9IZt7uU2EDrvJOORj1nJOCgYCbkG5xU\"\n}"
+						},
+						{
+							"name": "invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"r.granatodutre@gmail.com\",\r\n    \"password\": \"teste23\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-Fx+yDPXfDSYD3nxIxyU6P47CVX0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:12:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid credentials\",\n    \"error\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "[P] Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"password\": \"novasenha\",\r\n    \"user\": {\r\n        \"description\": \"Nova description\"\r\n    },\r\n    \"address\": {\r\n        \"number\": \"1092\",\r\n        \"complement\": \"Apartamento 02\"\r\n    }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/accounts/7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "conflict",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"r.granatodutra@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"7"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-eERxJ0ixffKUWuxoIJqeIWtzB9I\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:57:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email is already registered\",\n    \"error\": \"Conflict\",\n    \"statusCode\": 409\n}"
+						},
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"r.granatodutra12@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-Ne2IcemAdmgLpF9PVj9gb+YvINw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:58:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"email\": \"r.granatodutra12@gmail.com\",\n    \"phone\": \"+5551984449218\",\n    \"account_type\": \"ANNOUNCER\"\n}"
+						},
+						{
+							"name": "no auth",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"password\": \"novasenha\",\r\n    \"user\": {\r\n        \"description\": \"Nova description\"\r\n    },\r\n    \"address\": {\r\n        \"number\": \"1092\",\r\n        \"complement\": \"Apartamento 02\"\r\n    }\r\n }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/accounts/7",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"7"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:13:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "[P] Get one by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/accounts/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "400"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"190-LRYnNtuO4XmJR8Wo1BfBeYfI3Kc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:14:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 12,\n    \"email\": \"r.granatodutre@gmail.com\",\n    \"phone\": \"+5551984449212\",\n    \"account_type\": \"ANNOUNCER\",\n    \"address\": {\n        \"id\": 2,\n        \"zip_code\": \"92120131\",\n        \"state\": \"Rio Grande do Sul\",\n        \"city\": \"Canoas\",\n        \"street\": \"Rua Capistrano de Abreu\",\n        \"number\": \"1088\",\n        \"complement\": \"Casa 02\",\n        \"account_id\": 12\n    },\n    \"user\": {\n        \"id\": 11,\n        \"name\": \"Renan Dutra\",\n        \"cpf\": \"49072749049\",\n        \"birthday\": \"2000-02-16T03:00:00.000Z\",\n        \"description\": \"\",\n        \"account_id\": 12\n    }\n}"
+						},
+						{
+							"name": "forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/11",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"11"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-E82ZVGp2tqsB55miMX6yzR0nD5U\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:15:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid token for this user\",\n    \"error\": \"Forbidden\",\n    \"statusCode\": 403\n}"
+						},
+						{
+							"name": "no auth",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/11",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"11"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:15:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "[P]",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/accounts/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "400"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"190-LRYnNtuO4XmJR8Wo1BfBeYfI3Kc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:16:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 12,\n    \"email\": \"r.granatodutre@gmail.com\",\n    \"phone\": \"+5551984449212\",\n    \"account_type\": \"ANNOUNCER\",\n    \"address\": {\n        \"id\": 2,\n        \"zip_code\": \"92120131\",\n        \"state\": \"Rio Grande do Sul\",\n        \"city\": \"Canoas\",\n        \"street\": \"Rua Capistrano de Abreu\",\n        \"number\": \"1088\",\n        \"complement\": \"Casa 02\",\n        \"account_id\": 12\n    },\n    \"user\": {\n        \"id\": 11,\n        \"name\": \"Renan Dutra\",\n        \"cpf\": \"49072749049\",\n        \"birthday\": \"2000-02-16T03:00:00.000Z\",\n        \"description\": \"\",\n        \"account_id\": 12\n    }\n}"
+						},
+						{
+							"name": "not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"12"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-MsHsYy4eLSdX2tP9TY7wQ66pj5w\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:17:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account not found\",\n    \"error\": \"Not Found\",\n    \"statusCode\": 404\n}"
+						},
+						{
+							"name": "no auth",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/accounts/12",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"12"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 05:17:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{login_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Announcement",
+			"item": [
+				{
+					"name": "[P] Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"BMW\",\r\n    \"model\": \"Z8\",\r\n    \"color\": \"silver\",\r\n    \"year\": 2010,\r\n    \"fuel_type\": \"gas\",\r\n    \"mileage\": 15000,\r\n    \"price\": 650000,\r\n    \"cover_image\": \"http://www.image.com/image1\",\r\n    \"description\": \"descripcão\",\r\n    \"images\": [\r\n        \"http://www.image.com/image2\",\r\n        \"http://www.image.com/image3\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/announcements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"brand\": \"BMW\",\r\n    \"model\": \"Z8\",\r\n    \"color\": \"silver\",\r\n    \"year\": 2010,\r\n    \"fuel_type\": \"gas\",\r\n    \"mileage\": 15000,\r\n    \"price\": 650000,\r\n    \"cover_image\": \"http://www.image.com/image1\",\r\n    \"description\": \"descripcão\",\r\n    \"images\": [\r\n        \"http://www.image.com/image2\",\r\n        \"http://www.image.com/image3\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "311"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"137-h5mA0NzFjLWUlz/+SZLvBkm1uXs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:52:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"brand\": \"BMW\",\n    \"model\": \"Z8\",\n    \"color\": \"silver\",\n    \"year\": 2010,\n    \"fuel_type\": \"gas\",\n    \"mileage\": 15000,\n    \"price\": 650000,\n    \"description\": \"descripcão\",\n    \"account_id\": 12,\n    \"cover_image\": \"http://www.image.com/image1\",\n    \"gallery_images\": [\n        {\n            \"id\": 9,\n            \"url\": \"http://www.image.com/image2\"\n        },\n        {\n            \"id\": 10,\n            \"url\": \"http://www.image.com/image3\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"brand\": \"BMW\",\r\n    \"model\": \"Z8\",\r\n    \"color\": \"silver\",\r\n    \"year\": 2010,\r\n    \"fuel_type\": \"gas\",\r\n    \"mileage\": 15000,\r\n    \"cover_image\": \"http://www.image.com/image1\",\r\n    \"description\": \"descripcão\",\r\n    \"images\": [\r\n        \"http://www.image.com/image2\",\r\n        \"http://www.image.com/image3\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"75-Pj31SoP9VP1wDDBVqJ3dpyL8KXI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:53:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": [\n        \"price must be a number conforming to the specified constraints\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+						},
+						{
+							"name": "no token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"brand\": \"BMW\",\r\n    \"model\": \"Z8\",\r\n    \"color\": \"silver\",\r\n    \"year\": 2010,\r\n    \"fuel_type\": \"gas\",\r\n    \"mileage\": 15000,\r\n    \"price\": 650000,\r\n    \"cover_image\": \"http://www.image.com/image1\",\r\n    \"description\": \"descripcão\",\r\n    \"images\": [\r\n        \"http://www.image.com/image2\",\r\n        \"http://www.image.com/image3\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:53:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "[P] Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover_image\": \"novo link\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/announcements/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover_image\": \"novo link\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-yBFOsMd8gKEsWA3Rkne41ugQEsM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:55:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"brand\": \"BMW\",\n    \"model\": \"Z8\",\n    \"color\": \"silver\",\n    \"year\": 2010,\n    \"fuel_type\": \"gas\",\n    \"mileage\": 15000,\n    \"price\": 650000,\n    \"description\": \"descripcão\",\n    \"account_id\": 12,\n    \"cover_image\": \"novo link\"\n}"
+						},
+						{
+							"name": "bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements",
+										"5"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-X5nkmjHU8DSKbEEO7Qz01kU73Zs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:54:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Body should not be empty\",\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+						},
+						{
+							"name": "no token",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover_image\": \"novo link\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/announcements/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements",
+										"5"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-dGnJzt6gv1nJjX6DJ9RztDWptng\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:55:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unauthorized\",\n    \"statusCode\": 401\n}"
+						}
+					]
+				},
+				{
+					"name": "Get many",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/announcements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/announcements",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3049"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"be9-9DusQxHA9SPvYAGUqBuvpMoLkxE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:56:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 2,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 3,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 4,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 6,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 7,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"http://www.image.com/image1\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    },\n    {\n        \"id\": 5,\n        \"brand\": \"BMW\",\n        \"model\": \"Z8\",\n        \"color\": \"silver\",\n        \"year\": 2010,\n        \"fuel_type\": \"gas\",\n        \"mileage\": 15000,\n        \"price\": 650000,\n        \"description\": \"descripcão\",\n        \"account_id\": 12,\n        \"cover_image\": \"novo link\",\n        \"account\": {\n            \"id\": 12,\n            \"email\": \"r.granatodutre@gmail.com\",\n            \"phone\": \"+5551984449212\",\n            \"account_type\": \"ANNOUNCER\",\n            \"user\": {\n                \"id\": 11,\n                \"name\": \"Renan Dutra\",\n                \"cpf\": \"49072749049\",\n                \"birthday\": \"2000-02-16T03:00:00.000Z\",\n                \"description\": \"\",\n                \"account_id\": 12\n            }\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get one by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/announcements/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/announcements/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"announcements",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "594"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"252-kIT2AtcGWXpj/qPbxgrgY/d3cMo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 04:56:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"brand\": \"BMW\",\n    \"model\": \"Z8\",\n    \"color\": \"silver\",\n    \"year\": 2010,\n    \"fuel_type\": \"gas\",\n    \"mileage\": 15000,\n    \"price\": 650000,\n    \"description\": \"descripcão\",\n    \"account_id\": 12,\n    \"cover_image\": \"novo link\",\n    \"account\": {\n        \"id\": 12,\n        \"email\": \"r.granatodutre@gmail.com\",\n        \"phone\": \"+5551984449212\",\n        \"account_type\": \"ANNOUNCER\",\n        \"user\": {\n            \"id\": 11,\n            \"name\": \"Renan Dutra\",\n            \"cpf\": \"49072749049\",\n            \"birthday\": \"2000-02-16T03:00:00.000Z\",\n            \"description\": \"\",\n            \"account_id\": 12\n        },\n        \"address\": {\n            \"id\": 2,\n            \"zip_code\": \"92120131\",\n            \"state\": \"Rio Grande do Sul\",\n            \"city\": \"Canoas\",\n            \"street\": \"Rua Capistrano de Abreu\",\n            \"number\": \"1088\",\n            \"complement\": \"Casa 02\",\n            \"account_id\": 12\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{login_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "login_token",
+			"value": ""
+		}
+	]
+}
