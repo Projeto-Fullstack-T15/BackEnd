@@ -7,7 +7,6 @@ import {
   OneToMany,
 } from "typeorm";
 import { User } from "../../entity/User";
-//import { Comment } from "../../entity/Comment";
 
 @Entity("announcements")
 export class Announcement {
@@ -37,7 +36,6 @@ export class Announcement {
 
   @Column("text")
   description: string;
-
   @ManyToOne(() => User, (user) => user.announcements)
   @JoinColumn({ name: "UserID" })
   user: User;

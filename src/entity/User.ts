@@ -5,11 +5,12 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from "typeorm";
 import { Announcement } from "../modules/announcement/announcement";
-// import { Comment } from "./Comment";
-// import { Address } from "./Address";
-// import { Account } from "./Account";
+import { hash, hashSync } from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 
 @Entity("users")
 export class User {
@@ -31,22 +32,22 @@ export class User {
   Password: string;
 
   @Column({ type: "date" })
-  BirthDate: Date;
+  BirthDate: string | Date;
 
   @Column("text")
   Description: string;
+  @Column({ nullable: true })
+  token?: string;
 
   @OneToMany(() => Announcement, (announcement) => announcement.user)
   announcements: Announcement[];
 
-  //   @OneToMany(() => Comment, (comment) => comment.user)
-  //   comments: Comment[];
-
-  //   @OneToOne(() => Account)
-  //   @JoinColumn({ name: "AccountID" })
-  //   account: Account;
-
-  //   @OneToOne(() => Address)
-  //   @JoinColumn({ name: "AddressID" })
-  //   address: Address;
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const isHash = bcrypt.getRounds(this.Password);
+    if (!isHash) {
+      this.Password = hashSync(this.Password, 10);
+    }
+  }
 }

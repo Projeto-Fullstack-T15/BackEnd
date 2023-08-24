@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import * as services from "./servicesUser/services";
-import { TloginRequest, TtokenLoginResponse } from "./user.interface";
+import * as services from "./servicesUserLogin/services";
+import { TloginRequest, TtokenLoginResponse } from "./user.login.interface";
 export const createLogin = async (
   request: Request,
   response: Response
