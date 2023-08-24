@@ -1,0 +1,13 @@
+import { AccountType } from "@prisma/client";
+import { Address } from "src/modules/address/entities/address.entity";
+import { User } from "src/modules/user/entities/user.entity";
+
+export class Account {
+	readonly id: number;
+	email: string;
+	password: string;
+	phone: string;
+	account_type: AccountType;
+	address: Address;
+	user: User;
+}
