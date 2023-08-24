@@ -17,24 +17,13 @@ export class UserService {
         return plainToInstance(User, newUser);
     }
 
-    public async getOneById(id: number): Promise<User> {
-        const findUser = await this.repository.getUserById(id);
-
-        if (!findUser) {
-            throw new NotFoundException("User not found");
-        }
-
-        return plainToInstance(User, findUser);
-    }
-
-    public async update(id: number, data: UpdateUserDto): Promise<User> {
-        const findUser = await this.getOneById(id);
-        const updatedUser = await this.repository.updateUser(findUser, data);
+    public async update(account_id: number, data: UpdateUserDto): Promise<User> {
+        const updatedUser = await this.repository.updateUser(account_id, data);
 
         return plainToInstance(User, updatedUser);
     }
 
-    public async validate(data: CreateUserDto): Promise<void> {
+    public async validate(data: { cpf: string }): Promise<void> {
         const { cpf } = data;
         const cpfAlreadyRegistered = await this.repository.findUser({ cpf });
 

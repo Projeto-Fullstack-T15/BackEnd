@@ -1,11 +1,12 @@
 import { UserService } from './../user/user.service';
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, UseGuards, Req, ForbiddenException } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountRequest } from './dto/create-account.dto';
 import { UpdateAccountRequest } from './dto/update-account.dto';
 import { AddressService } from '../address/address.service';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { LocalAuthGuard } from './guards/local.guard';
+import { JwtAuthGuard } from './guards/jwt.guard';
 
 @Controller('api/accounts')
 export class AccountController {
@@ -32,11 +33,19 @@ export class AccountController {
 	}
 
 	@Get(':id')
-	public async findOne(@Param('id') id: string) {
+	@UseGuards(JwtAuthGuard)
+	public async findOne(@Req() req: any, @Param('id') id: string) {
+		const tokenContainThisId: boolean = req.user.id === +id;
+
+		if (!tokenContainThisId) {
+			throw new ForbiddenException("Invalid token for this user")
+		}
+
 		return this.accountService.getOneById(+id);
 	}
 
 	@Patch(':id')
+	@UseGuards(JwtAuthGuard)
 	public async update(@Param('id') id: string, @Body() data: UpdateAccountRequest) {
 		const { user, address, ...account } = data;
 
@@ -45,7 +54,7 @@ export class AccountController {
 		}
 
 		if (user?.cpf) {
-			await this.userService.validate(user);
+			await this.userService.validate({ cpf: user.cpf });
 		}
 
 		if (account?.email || account?.phone) {
@@ -53,8 +62,8 @@ export class AccountController {
 		}
 
 		const updatedAccount = account && await this.accountService.update(+id, account);
-		const updatedUser = user && await this.userService.update(updatedAccount.user.id, user);
-		const updatedAddress = address && await this.addressService.update(updatedAccount.address.id, address);
+		const updatedUser = user && await this.userService.update(+id, user);
+		const updatedAddress = address && await this.addressService.update(+id, address);
 
 		updatedAccount.user = updatedUser;
 		updatedAccount.address = updatedAddress;
@@ -63,7 +72,14 @@ export class AccountController {
 	}
 
 	@Delete(':id')
-	public async remove(@Param('id') id: string) {
+	@UseGuards(JwtAuthGuard)
+	public async remove(@Req() req: any, @Param('id') id: string) {
+		const tokenContainThisId: boolean = req.user.id === +id;
+
+		if (!tokenContainThisId) {
+			throw new ForbiddenException("Invalid token for this user")
+		}
+
 		return this.accountService.remove(+id);
 	}
 
@@ -71,7 +87,8 @@ export class AccountController {
 	@UseGuards(LocalAuthGuard)
 	public async login(@Body() data: LoginAccountDto) {
 		const { email } = data;
+		const token = await this.accountService.generateToken(email);
 
-		return await this.accountService.generateToken(email);
+		return { token };
 	}
 }

@@ -38,11 +38,11 @@ export class AddressPrismaRepository implements AddressRepository {
         }
     }
 
-    public async updateAddress(address: Address, data: UpdateAddressDto): Promise<Address> {
+    public async updateAddress(account_id: number, data: UpdateAddressDto): Promise<Address> {
         try {
             const updatedAddress = await this.prisma.address.update({
                 data,
-                where: { id: address.id }
+                where: { account_id }
             });
 
             return updatedAddress;

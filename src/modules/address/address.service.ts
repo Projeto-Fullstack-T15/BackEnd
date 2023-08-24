@@ -27,9 +27,8 @@ export class AddressService {
 		return plainToInstance(Address, findAddress);
 	}
 
-	public async update(id: number, data: UpdateAddressDto): Promise<Address> {
-		const findAddress = await this.getOneById(id);
-		const updatedAddress = await this.repository.updateAddress(findAddress, data);
+	public async update(account_id: number, data: UpdateAddressDto): Promise<Address> {
+		const updatedAddress = await this.repository.updateAddress(account_id, data);
 
 		return plainToInstance(Address, updatedAddress);
 	}

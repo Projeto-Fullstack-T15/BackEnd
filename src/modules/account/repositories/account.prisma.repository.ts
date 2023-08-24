@@ -23,7 +23,11 @@ export class AccountPrismaRepository implements AccountRepository {
 
 	public async getAccountById(id: number): Promise<Account> {
 		try {
-			const findAccount = await this.db.account.findUnique({ where: { id } });
+			const findAccount = await this.db.account.findUnique({
+				where: { id }, include: {
+					address: true, user: true
+				}
+			});
 
 			return findAccount;
 		} catch (err) {

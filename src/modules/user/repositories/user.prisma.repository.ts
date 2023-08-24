@@ -38,11 +38,11 @@ export class UserPrismaRepository implements UserRepository {
 		}
 	}
 
-	public async updateUser(user: User, data: UpdateUserDto): Promise<User> {
+	public async updateUser(account_id: number, data: UpdateUserDto): Promise<User> {
 		try {
 			const updatedUser = await this.db.user.update({
 				data,
-				where: { id: user.id }
+				where: { account_id }
 			});
 
 			return updatedUser;

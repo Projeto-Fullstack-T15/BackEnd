@@ -5,5 +5,5 @@ import { Address } from '@prisma/client';
 export abstract class AddressRepository {
     public abstract createNewAddress(data: CreateAddressDto, account_id: number): Promise<Address>;
     public abstract getAddressById(id: number): Promise<Address>;
-    public abstract updateAddress(address: Address, data: UpdateAddressDto): Promise<Address>;
+    public abstract updateAddress(account_id: number, data: UpdateAddressDto): Promise<Address>;
 }

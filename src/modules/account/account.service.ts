@@ -46,12 +46,12 @@ export class AccountService {
 	public async validate(data: UpdateAccountDto): Promise<void> {
 		const { email, phone } = data;
 
-		const emailAlreadyRegistered = await this.repository.findAccount({ email });
+		const emailAlreadyRegistered = email && await this.repository.findAccount({ email });
 		if (emailAlreadyRegistered) {
 			throw new ConflictException("Email is already registered");
 		}
 
-		const phoneAlreadyRegistered = await this.repository.findAccount({ phone });
+		const phoneAlreadyRegistered = phone && await this.repository.findAccount({ phone });
 		if (phoneAlreadyRegistered) {
 			throw new ConflictException("Phone is already registered");
 		}
@@ -75,7 +75,7 @@ export class AccountService {
 
 	public async generateToken(email: string) {
 		const account = await this.repository.findAccount({ email });
-		const token = this.jwtService.sign({ email }, { subject: String(account.id) });
+		const token = this.jwtService.sign({ email, isAnnouncer: account.account_type === "ANNOUNCER" }, { subject: String(account.id) });
 
 		return token;
 	}
