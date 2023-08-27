@@ -1,7 +1,7 @@
 import * as controllers from "./user.controllers";
 import * as global from "../../global";
 import * as middlewares from "../cotrollerslogin/middlewares";
-import Router from "express";
+import { Router } from "express";
 import { SchemaUpdateUserRequest } from "./user.schemas";
 export const userRoutes = Router();
 userRoutes.patch(
