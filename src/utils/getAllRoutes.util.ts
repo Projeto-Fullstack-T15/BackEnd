@@ -10,7 +10,7 @@ export function getAllEndpoints(router: Router, path?: string) {
         const methods = Object.keys(layer.route.methods);
 
         methods.forEach((method) => {
-          endpoints.push(`${method.toUpperCase()} ${path}${subPath}`);
+          endpoints.push(`${method.toUpperCase().padEnd(6, " ")} ${path}${subPath}`);
         });
       }
     });

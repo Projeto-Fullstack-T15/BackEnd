@@ -5,23 +5,23 @@ import { Router } from "express";
 import { SchemaUpdateUserRequest } from "./user.schemas";
 export const userRoutes = Router();
 userRoutes.patch(
-  "/:id",
+  ":id",
   global.middlewares.parseBodyWith(SchemaUpdateUserRequest),
   middlewares.verifyIdMiddUser
 );
 
 userRoutes.delete(
-  "/:id",
+  ":id",
   middlewares.verifyIdMiddUser,
   middlewares.verifyTokenValidMidd,
   middlewares.verifyUserLogging,
   controllers.removeUser
 );
 userRoutes.post("", controllers.forgetPassword);
-userRoutes.post("/:token", controllers.newPassword);
+userRoutes.post(":token", controllers.newPassword);
 
 userRoutes.get(
-  "/:id/Announcement",
+  ":id/announcement",
   middlewares.verifyIdMiddUser,
   middlewares.verifyTokenValidMidd,
   controllers.listUserAnnouncementControllers
