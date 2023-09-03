@@ -4,10 +4,6 @@ https://documenter.getpostman.com/view/29095863/2s9Y5VVjz7
 Convite para o postman: 
 https://app.getpostman.com/join-team?invite_code=8ccc523b37528f363c4277903ab8fb26&target_code=45d704b37d4028c688b746a87d283f8b
 
-Ou se preferir, importe a coleção no arquivo: "Projetct's API.postman_collection.json"
-
-OBS: Todas as requisições estão nas coleções do postman, acesse para melhor visualização.
-
 Como rodar o projeto:
 
 1. Crie o banco de dados com o nome a sua escolha
