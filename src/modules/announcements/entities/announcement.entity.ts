@@ -14,6 +14,7 @@ export class Announcement {
     description: string;
     cover_image: string;
     gallery_images: Array<GalleryImage>;
-
     account: Account;
+    created_at: Date;
+    updated_at: Date | null;
 }

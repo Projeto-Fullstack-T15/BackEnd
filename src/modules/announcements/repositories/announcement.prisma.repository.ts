@@ -45,7 +45,8 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
             });
 
             return findAnnouncement;
-        } catch {
+        } catch (err) {
+            console.error(err);
             throw new InternalServerErrorException("An error ocurred when tried to find announcement");
         }
     }

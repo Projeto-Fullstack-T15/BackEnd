@@ -4,6 +4,7 @@ import { AnnouncementsController } from './announcements.controller';
 import { AnnouncementRepository } from './repositories/announcement.repository';
 import { AnnouncementPrismaRepository } from './repositories/announcement.prisma.repository';
 import { PrismaService } from 'src/database/prisma.service';
+import { CommentsModule } from '../comments/comments.module';
 
 @Module({
 	controllers: [
@@ -17,5 +18,6 @@ import { PrismaService } from 'src/database/prisma.service';
 			useClass: AnnouncementPrismaRepository
 		}
 	],
+	imports: [CommentsModule]
 })
 export class AnnouncementsModule { }

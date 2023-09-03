@@ -1,13 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Req, UseGuards, ForbiddenException, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Req, UseGuards, ForbiddenException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementRequest } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 import { JwtAuthGuard } from '../account/guards/jwt.guard';
+import { CommentsService } from '../comments/comments.service';
+import { CreateCommentDto } from '../comments/dto/create-comment.dto';
 
 @Controller('api/announcements')
 export class AnnouncementsController {
 	constructor(
-		private readonly announcementsService: AnnouncementsService
+		private readonly announcementsService: AnnouncementsService,
+		private readonly commentsService: CommentsService
 	) { }
 
 	@Post()
@@ -46,5 +49,38 @@ export class AnnouncementsController {
 		const updatedAnnouncement = await this.announcementsService.update(findAnnouncement.id, data);
 
 		return updatedAnnouncement;
+	}
+
+	@Get(':id/comments')
+	public async getAnnouncementComments(
+		@Param('id') id: string
+	) {
+		const findAnnouncement = await this.announcementsService.findOne(+id);
+
+		if (!findAnnouncement) {
+			throw new NotFoundException("Announcement not found");
+		}
+
+		const comments = await this.commentsService.findAllByAnnouncement(+id);
+
+		return comments;
+	}
+
+	@Post(':id/comments')
+	@UseGuards(JwtAuthGuard)
+	public async insertAnnouncementComment(
+		@Body() data: CreateCommentDto,
+		@Req() req: any,
+		@Param('id') id: string,
+	) {
+		const findAnnouncement = await this.announcementsService.findOne(+id);
+
+		if (!findAnnouncement) {
+			throw new NotFoundException("Announcement not found");
+		}
+
+		const newComment = await this.commentsService.insertNewComment(+id, req.user.id, data);
+
+		return newComment;
 	}
 }

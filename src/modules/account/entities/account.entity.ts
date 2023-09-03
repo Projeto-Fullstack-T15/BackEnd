@@ -14,4 +14,6 @@ export class Account {
 	account_type: AccountType;
 	address: Address;
 	user: User;
+	created_at: Date;
+	last_updated_at: Date | null;
 }

@@ -42,7 +42,7 @@ export class AccountController {
 			throw new ForbiddenException("Invalid token for this user")
 		}
 
-		return this.accountService.getOneById(+id);
+		return await this.accountService.getOneById(+id);
 	}
 
 	@Patch(':id')
@@ -81,7 +81,7 @@ export class AccountController {
 			throw new ForbiddenException("Invalid token for this user")
 		}
 
-		return this.accountService.remove(+id);
+		return await this.accountService.remove(+id);
 	}
 
 	@Post('login')
