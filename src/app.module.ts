@@ -6,6 +6,8 @@ import { UserModule } from './modules/user/user.module';
 import { AddressModule } from './modules/address/address.module';
 import { AnnouncementsModule } from './modules/announcements/announcements.module';
 import { CommentsModule } from './modules/comments/comments.module';
+import { MailService } from './utils/mail/mail.service';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
 	imports: [
@@ -13,9 +15,22 @@ import { CommentsModule } from './modules/comments/comments.module';
 		UserModule,
 		AddressModule,
 		AnnouncementsModule,
-		CommentsModule
+		CommentsModule,
+		MailerModule.forRoot({
+			transport: {
+				host: "smtp.gmail.com",
+				auth: {
+					user: process.env.SMTP_USER,
+					pass: process.env.SMTP_PASS
+				}
+			}
+		})
 	],
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [AppService, MailService],
 })
-export class AppModule { }
+export class AppModule {
+	constructor() {
+		console.log(process.env.SMTP_USER, process.env.SMTP_PASS)
+	}
+}

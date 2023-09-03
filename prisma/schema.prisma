@@ -12,6 +12,7 @@ model Account {
   email           String
   password        String
   phone           String
+  reset_token     String?
   account_type    AccountType
   user            User?
   address         Address?

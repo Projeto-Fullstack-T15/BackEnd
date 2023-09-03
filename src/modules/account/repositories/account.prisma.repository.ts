@@ -44,6 +44,7 @@ export class AccountPrismaRepository implements AccountRepository {
 
 			return updatedAccount;
 		} catch (err) {
+			console.error(err)
 			throw new InternalServerErrorException("An error ocurred when tried to update account");
 		}
 	}
@@ -60,9 +61,9 @@ export class AccountPrismaRepository implements AccountRepository {
 		}
 	}
 
-	public findAccount(search: UpdateAccountDto): Promise<Account> {
+	public async findAccount(search: UpdateAccountDto): Promise<Account> {
 		try {
-			const findAccount = this.db.account.findFirst({
+			const findAccount = await this.db.account.findFirst({
 				where: { ...search }
 			});
 

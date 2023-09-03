@@ -1,5 +1,5 @@
 import { UserService } from './../user/user.service';
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, UseGuards, Req, ForbiddenException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, UseGuards, Req, ForbiddenException, HttpCode } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountRequest } from './dto/create-account.dto';
 import { UpdateAccountRequest } from './dto/update-account.dto';
@@ -93,23 +93,29 @@ export class AccountController {
 		return { token };
 	}
 
-	@Get('password/recover')
-	public async sendRecoveryEmail(@Body() data: SendRecoverEmailDto) {
-		await this.accountService.sendRecoveryEmail(data.email);
-
-		return;
-	}
-
-	@Post('password/reset')
-	public async resetPassword(@Body() data: RecoverAccountDto) {
-		await this.accountService.resetPassword(data.token, data.newPassword);
-
-		return;
-	}
-
 	@Get()
 	@UseGuards(JwtAuthGuard)
 	public async getOneByToken(@Req() req: any) {
 		return await this.accountService.getOneById(req.user.id);
+	}
+
+	@HttpCode(200)
+	@Post('reset-password')
+	public async sendEmailResetPassword(
+		@Body() data: SendRecoverEmailDto
+	) {
+		await this.accountService.sendEmailResetPassword(data.email);
+
+		return { message: 'Reset token has been successfuly sent' };
+	}
+
+	@Patch('reset-password/:token')
+	public async resetPassword(
+		@Param('token') token: string,
+		@Body() data: RecoverAccountDto
+	) {
+		await this.accountService.resetPassword(data.password, token);
+
+		return { message: 'Password was successfuly reset' };
 	}
 }

@@ -2,13 +2,10 @@ import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-valid
 
 export class RecoverAccountDto {
     @IsString()
-    token: string;
-
-    @IsString()
     @IsNotEmpty()
     @MinLength(8)
     @MaxLength(100)
-    newPassword: string;
+    password: string;
 };
 
 export class SendRecoverEmailDto {

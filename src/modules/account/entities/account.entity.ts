@@ -10,10 +10,13 @@ export class Account {
 	@Exclude()
 	password: string;
 
+	@Exclude()
+	reset_token: string;
+
 	phone: string;
 	account_type: AccountType;
 	address: Address;
 	user: User;
 	created_at: Date;
-	last_updated_at: Date | null;
+	last_updated_at: Date;
 }
