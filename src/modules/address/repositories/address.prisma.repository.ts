@@ -8,49 +8,58 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class AddressPrismaRepository implements AddressRepository {
-    constructor(
-        private readonly prisma: PrismaService
-    ) { }
+  constructor(private readonly prisma: PrismaService) {}
 
-    public async createNewAddress(data: CreateAddressDto, account_id: number): Promise<Address> {
-        try {
-            const newAddress = await this.prisma.address.create({ data: { ...data, account_id } });
+  public async createNewAddress(
+    data: CreateAddressDto,
+    account_id: number
+  ): Promise<Address> {
+    try {
+      const newAddress = await this.prisma.address.create({
+        data: { ...data, account_id },
+      });
 
-            return newAddress;
-        } catch (err) {
-            throw new InternalServerErrorException(err, {
-                cause: err,
-                description: "An error ocurred when tried to create a new address"
-            });
-        }
+      return newAddress;
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerErrorException(err, {
+        cause: err,
+        description: "An error ocurred when tried to create a new address",
+      });
     }
+  }
 
-    public async getAddressById(id: number): Promise<Address> {
-        try {
-            const findAddress = await this.prisma.address.findUnique({ where: { id } });
+  public async getAddressById(id: number): Promise<Address> {
+    try {
+      const findAddress = await this.prisma.address.findUnique({
+        where: { id },
+      });
 
-            return findAddress;
-        } catch (err) {
-            throw new InternalServerErrorException(err, {
-                cause: err,
-                description: "An error ocurred when tried to search for address"
-            });
-        }
+      return findAddress;
+    } catch (err) {
+      throw new InternalServerErrorException(err, {
+        cause: err,
+        description: "An error ocurred when tried to search for address",
+      });
     }
+  }
 
-    public async updateAddress(account_id: number, data: UpdateAddressDto): Promise<Address> {
-        try {
-            const updatedAddress = await this.prisma.address.update({
-                data,
-                where: { account_id }
-            });
+  public async updateAddress(
+    account_id: number,
+    data: UpdateAddressDto
+  ): Promise<Address> {
+    try {
+      const updatedAddress = await this.prisma.address.update({
+        data,
+        where: { account_id },
+      });
 
-            return updatedAddress;
-        } catch (err) {
-            throw new InternalServerErrorException(err, {
-                cause: err,
-                description: "An error ocurred when tried to update address"
-            });
-        }
+      return updatedAddress;
+    } catch (err) {
+      throw new InternalServerErrorException(err, {
+        cause: err,
+        description: "An error ocurred when tried to update address",
+      });
     }
+  }
 }
