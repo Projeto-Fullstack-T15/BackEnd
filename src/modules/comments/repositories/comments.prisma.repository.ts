@@ -3,8 +3,9 @@ import { CreateCommentDto } from "../dto/create-comment.dto";
 import { UpdateCommentDto } from "../dto/update-comment.dto";
 import { CommentsRepository } from "./comments.repository";
 import { PrismaService } from "src/database/prisma.service";
-import { InternalServerErrorException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
+@Injectable()
 export class CommentsPrismaRepository implements CommentsRepository {
     constructor(
         private readonly db: PrismaService
@@ -22,6 +23,7 @@ export class CommentsPrismaRepository implements CommentsRepository {
 
             return newComment;
         } catch (err) {
+            console.error(err)
             throw new InternalServerErrorException("An error ocurred when tried to create comment");
         }
     }
@@ -33,6 +35,16 @@ export class CommentsPrismaRepository implements CommentsRepository {
             const findComments = await this.db.comment.findMany({ where: { announcement_id } });
 
             return findComments;
+        } catch (err) {
+            throw new InternalServerErrorException("An error ocurred when tried to get comments");
+        }
+    }
+
+    public async findCommentById(comment_id: number): Promise<Comment> {
+        try {
+            const findComment = await this.db.comment.findUniqueOrThrow({ where: { id: comment_id } });
+
+            return findComment;
         } catch (err) {
             throw new InternalServerErrorException("An error ocurred when tried to get comments");
         }

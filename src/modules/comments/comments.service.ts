@@ -17,6 +17,9 @@ export class CommentsService {
 		return await this.commentsRepository.insertNewComment(announcement_id, account_id, data);
 	}
 
+	public async findOneById(comment_id: number) {
+		return await this.commentsRepository.findCommentById(comment_id);
+	}
 	public async findAllByAnnouncement(
 		announcement_id: number,
 	) {

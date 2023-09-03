@@ -5,6 +5,7 @@ import { UpdateCommentDto } from "src/modules/comments/dto/update-comment.dto";
 export abstract class CommentsRepository {
     public abstract insertNewComment(announcementId: number, account_id: number, data: CreateCommentDto): Promise<Comment>;
     public abstract getAnnouncementComments(announcement_id: number): Promise<Array<Comment>>;
+    public abstract findCommentById(comment_id: number): Promise<Comment>;
     public abstract updateComment(commentId: number, data: UpdateCommentDto): Promise<Comment>;
     public abstract deleteComment(commentId: number): Promise<void>;
 }
