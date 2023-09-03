@@ -106,4 +106,10 @@ export class AccountController {
 
 		return;
 	}
+
+	@Get()
+	@UseGuards(JwtAuthGuard)
+	public async getOneByToken(@Req() req: any) {
+		return await this.accountService.getOneById(req.user.id);
+	}
 }
