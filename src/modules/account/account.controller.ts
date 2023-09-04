@@ -22,6 +22,7 @@ export class AccountController {
 		const { user, address, ...account } = data;
 
 		await this.userService.validate(user);
+		await this.accountService.validate(account);
 
 		const newAccount = await this.accountService.createNew(account);
 		const newUser = await this.userService.createNew(user, newAccount.id);
