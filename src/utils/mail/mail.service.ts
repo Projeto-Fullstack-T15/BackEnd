@@ -6,7 +6,7 @@ const mailGenerator = new Mailgen({
     theme: 'default',
     product: {
         name: 'Recuperação de senha',
-        link: 'http://localhost:3000'
+        link: 'http://localhost:5173'
     }
 });
 
@@ -34,7 +34,7 @@ export class MailService {
                     button: {
                         color: "#DC4D2F",
                         text: "Recover your password",
-                        link: `http://localhost:3000/reset-password/${token}`
+                        link: `http://localhost:5173/resetPassword/${token}`
                     }
                 },
                 outro: 'If you have not sent this request, this email should be ignored.'
