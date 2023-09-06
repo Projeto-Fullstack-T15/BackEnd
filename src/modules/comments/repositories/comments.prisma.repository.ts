@@ -32,7 +32,16 @@ export class CommentsPrismaRepository implements CommentsRepository {
         announcement_id: number
     ): Promise<Array<Comment>> {
         try {
-            const findComments = await this.db.comment.findMany({ where: { announcement_id } });
+            const findComments = await this.db.comment.findMany({
+                where: { announcement_id },
+                include: {
+                    account: {
+                        include: {
+                            user: true
+                        }
+                    }
+                }
+            });
 
             return findComments;
         } catch (err) {

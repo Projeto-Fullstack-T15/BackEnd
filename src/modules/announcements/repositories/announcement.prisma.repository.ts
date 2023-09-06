@@ -39,7 +39,7 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
             const findAnnouncement = await this.db.announcement.findUnique({
                 where: { id }, include: {
                     account: {
-                        include: { user: true, address: true }
+                        include: { user: true, address: true, }
                     }
                 }
             });
@@ -54,7 +54,7 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     public async getMany(): Promise<Array<Announcement & { account: Account }>> {
         try {
             const allAnnouncements = await this.db.announcement.findMany({
-                include: { account: { include: { user: true } } }
+                include: { account: { include: { user: true } }, gallery_images: true }
             });
 
             return allAnnouncements;
