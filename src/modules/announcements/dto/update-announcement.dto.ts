@@ -1,4 +1,9 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAnnouncementDto } from './create-announcement.dto';
+import { IsBoolean, IsOptional } from 'class-validator';
 
-export class UpdateAnnouncementDto extends PartialType(CreateAnnouncementDto) {}
+export class UpdateAnnouncementDto extends PartialType(CreateAnnouncementDto) {
+    @IsOptional()
+    @IsBoolean()
+    is_active: boolean;
+}
