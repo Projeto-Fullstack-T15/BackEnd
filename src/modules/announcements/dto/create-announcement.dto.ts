@@ -22,6 +22,9 @@ export class CreateAnnouncementDto {
     @IsNumber()
     price: number;
 
+    @IsNumber()
+    fipe_price: number;
+
     @IsString()
     description: string;
 

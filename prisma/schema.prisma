@@ -63,7 +63,7 @@ model Announcement {
   fuel_type       String
   mileage         Float
   price           Float
-  fipe_price      Float
+  fipe_price      Float     @default(0)
   description     String
   cover_image     String
   account_id      Int
