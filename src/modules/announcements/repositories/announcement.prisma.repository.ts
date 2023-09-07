@@ -30,7 +30,17 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
 
             return updatedAnnouncement;
         } catch {
-            throw new InternalServerErrorException("An error ocurred when tried to create announcement");
+            throw new InternalServerErrorException("An error ocurred when tried to update announcement");
+        }
+    }
+
+    public async delete(id: number): Promise<void> {
+        try {
+            await this.db.announcement.delete({ where: { id } });
+
+            return;
+        } catch {
+            throw new InternalServerErrorException("An error ocurred when tried to delete announcement");
         }
     }
 

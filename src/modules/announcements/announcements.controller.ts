@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Req, UseGuards, ForbiddenException, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Req, UseGuards, ForbiddenException, BadRequestException, NotFoundException, Delete } from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementRequest } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
@@ -82,5 +82,19 @@ export class AnnouncementsController {
 		const newComment = await this.commentsService.insertNewComment(+id, req.user.id, data);
 
 		return newComment;
+	}
+
+	@Delete(':id')
+	@UseGuards(JwtAuthGuard)
+	public async delete(@Req() req: any, @Param('id') id: string) {
+		const findAnnouncement = await this.announcementsService.findOne(+id);
+
+		if (findAnnouncement.account_id !== req.user.id) {
+			throw new ForbiddenException("You dont have permission to edit this announcemnet");
+		}
+
+		await this.announcementsService.delete(findAnnouncement.id);
+
+		return;
 	}
 }

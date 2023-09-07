@@ -60,4 +60,11 @@ export class AnnouncementsService {
 
 		return plainToInstance(Announcement, updatedAnnouncement);
 	}
+
+	public async delete(id: number) {
+		await this.findOne(id);
+		await this.repository.delete(id);
+
+		return;
+	}
 }
