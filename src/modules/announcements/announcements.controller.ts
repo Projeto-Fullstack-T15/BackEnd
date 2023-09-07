@@ -90,7 +90,7 @@ export class AnnouncementsController {
 		const findAnnouncement = await this.announcementsService.findOne(+id);
 
 		if (findAnnouncement.account_id !== req.user.id) {
-			throw new ForbiddenException("You dont have permission to edit this announcemnet");
+			throw new ForbiddenException("You dont have permission to delete this announcemnet");
 		}
 
 		await this.announcementsService.delete(findAnnouncement.id);
