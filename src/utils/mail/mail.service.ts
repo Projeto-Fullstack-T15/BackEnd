@@ -34,7 +34,7 @@ export class MailService {
                     button: {
                         color: "#DC4D2F",
                         text: "Recover your password",
-                        link: `${process.env.FRONTEND_RECOVER_URL}?token=${token}`
+                        link: `${process.env.FRONTEND_RECOVER_URL}/${token}`
                     }
                 },
                 outro: 'If you have not sent this request, this email should be ignored.'
