@@ -6,7 +6,7 @@ const mailGenerator = new Mailgen({
     theme: 'default',
     product: {
         name: 'Recuperação de senha',
-        link: 'http://localhost:3000'
+        link: process.env.FRONTEND_BASE_URL
     }
 });
 
@@ -34,7 +34,7 @@ export class MailService {
                     button: {
                         color: "#DC4D2F",
                         text: "Recover your password",
-                        link: `http://localhost:3000/reset-password/${token}`
+                        link: `${process.env.FRONTEND_RECOVER_URL}?token=${token}`
                     }
                 },
                 outro: 'If you have not sent this request, this email should be ignored.'
